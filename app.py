@@ -24,7 +24,13 @@ Session(app)
 def index():
     return render_template("index.html")
 
-@app.route("/admin")
+@app.route("/admin", methods=["GET", "POST"])
 def admin():
-    tables = db.get_all()
-    return render_template("admin.html")
+    if request.method == "GET":
+        table_names = db.tables
+        selected_table = request.args.get("table")
+        if selected_table:
+            table = db.get_all_from(selected_table)
+        else:
+            table = None
+        return render_template("admin.html", table_names = table_names, table = table)

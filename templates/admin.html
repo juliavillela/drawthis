@@ -3,5 +3,25 @@
 {% block main %}
 
 <h1>ROUTE ADMIN</h1>
+    {% for name in table_names %}
+        <a href="/admin?table={{ name }}" method="get" name="selected_table" value="{{ name }}">{{ name }}</a>
+    {% endfor %}
+
+    {% if table %}
+        <h1>{{ table['table_name'] }}</h1>
+        <table class="table">
+            {% for key in table['keys'] %}
+                    <th>{{ key['name'] }}</th>
+            {% endfor %}
+            {% for row in table['data'] %}
+                <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+    {% else %}
+        <h1>choose table to edit</h1>
+    {% endif %}
 
 {% endblock %}
