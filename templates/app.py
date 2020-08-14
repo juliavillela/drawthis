@@ -5,14 +5,12 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
-from db import DB
 
+from models.db import DB
+from db_requests import get_cards
 # Configure application
 app = Flask(__name__)
-
-#assign db source
 db = DB("drawthis.db")
-
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
@@ -22,9 +20,16 @@ Session(app)
 #routes
 @app.route("/")
 def index():
-    return render_template("index.html")
+    cards = get_cards()
+    return render_template("index.html", cards=cards)
 
-@app.route("/admin")
+@app.route("/admin", methods=["GET", "POST"])
 def admin():
-    tables = db.get_all()
-    return render_template("admin.html")
+    if request.method == "GET":
+        table = db.table_names
+        adjectives = db.get_all_from('adjectives')
+        subjects = db.get_all_from('subjects')
+        tables = [subjects, adjectives]
+        return render_template("admin.html", tables = tables)
+    else:
+        data = request.form
