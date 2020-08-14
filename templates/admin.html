@@ -9,6 +9,16 @@
 
     {% if table %}
         <h1>{{ table['table_name'] }}</h1>
+        <form class="basic-form" action="/admin" method="post" name="">
+            <input type="hidden" name="table_name" value="{{ table['table_name'] }}">
+            {% for key in table['keys'] %}
+                {% if key['name'] != 'id'%}
+                    <input type="text" name="{{ key['name'] }}" value="" placeholder="{{ key['name'] }}">
+                {% endif %}
+            {% endfor %}
+            <input type="submit" name="{{ table['table_name'] }}" value="add">
+        </form>
+
         <table class="table">
             {% for key in table['keys'] %}
                     <th>{{ key['name'] }}</th>

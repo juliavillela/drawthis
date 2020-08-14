@@ -27,10 +27,25 @@ def index():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if request.method == "GET":
-        table_names = db.tables
+        #if user selected table, display table, else, display only table links
         selected_table = request.args.get("table")
+        table_names = db.tables
         if selected_table:
             table = db.get_all_from(selected_table)
         else:
             table = None
         return render_template("admin.html", table_names = table_names, table = table)
+
+    else:
+        table_name = request.form.get("table_name")
+        table_keys = db.get_keys(table_name)
+        keys = []
+        data = []
+        for key in table_keys:
+            input = request.form.get(key['name'])
+            if input:
+                keys.append(key['name'])
+                data.append("'" + input + "'")
+        db.insert(keys, data, table_name)
+
+        return redirect("/admin")
