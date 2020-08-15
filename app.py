@@ -7,12 +7,14 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from database.tables_controller import TablesController
+from database.cards_controller import CardsController
 
 # Configure application
 app = Flask(__name__)
 
 #assign db source
 db = TablesController(["nouns", "adjectives", "actions", "situations"])
+draw = CardsController("en", db)
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
@@ -23,7 +25,8 @@ Session(app)
 #routes
 @app.route("/")
 def index():
-    return render_template("index.html")
+    cards = draw.build_cards()
+    return render_template("index.html", cards = cards)
 
 
 @app.route("/admin", methods=["GET", "POST"])

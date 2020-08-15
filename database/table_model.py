@@ -3,23 +3,13 @@ class Table:
     def __init__(self, db, name):
         self.db = db;
         self.name = name
+        self.phrases = []
         self.columns = self.get_columns()
-        self.row_count = self.row_count()
+        self.count = 0
 
-    def get_columns(self):
-        columns={}
-        columns_obj = self.db.execute("SELECT name FROM PRAGMA_TABLE_INFO('" + self.name + "');")
-        for column in columns_obj:
-            columns[column['name']] = None
-        return columns
 
-    def row_count(self):
-        rows = self.list()
-        count = len(rows)
-        return count
-
-    def list(self):
-        rows = self.db.execute("SELECT * FROM " + self.name)
+    def list(self, filter=""):
+        rows = self.db.execute("SELECT * FROM " + self.name + filter)
         return rows
 
     def create(self, data_dict):
@@ -36,12 +26,37 @@ class Table:
 
         self.db.execute(query)
 
-    def find(self, item_id):
-        rows = self.db.execute("SELECT * FROM " + self.name + " WHERE id =" + str(item_id))
-        if len(rows) != 1:
-            return None
-        else:
-            return rows[0]
+    # def find(self, item_id):
+    #     rows = self.db.execute("SELECT * FROM " + self.name + " WHERE id =" + str(item_id))
+    #     if len(rows) != 1:
+    #         return None
+    #     else:
+    #         return rows[0]
 
     def destroy(self, item_id):
         self.db.execute("DELETE FROM " + self.name + " WHERE id=" + item_id)
+
+    def load(self, filter):
+        self.unload()
+        all = self.list(filter)
+        for row in all:
+            self.phrases.append(row)
+        self.update_count()
+
+    def unload(self):
+        self.phrases = [];
+
+# """ inner class methods """
+    # def literal(string):
+    #     literal = "'" + string + "'"
+    #     return literal
+
+    def get_columns(self):
+        columns={}
+        columns_obj = self.db.execute("SELECT name FROM PRAGMA_TABLE_INFO('" + self.name + "');")
+        for column in columns_obj:
+            columns[column['name']] = None
+        return columns
+
+    def update_count(self):
+        self.count = len(self.phrases)

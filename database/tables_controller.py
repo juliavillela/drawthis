@@ -1,4 +1,5 @@
 from cs50 import SQL
+from random import randint
 from database.table_model import Table
 
 class TablesController:
@@ -39,3 +40,13 @@ class TablesController:
 
     def destroy(self, name, item_id):
         self.tables[name].destroy(item_id)
+
+    def load(self, language):
+        for table in self.tables.values():
+            table.load(" WHERE language= '" + language + "'")
+
+    def get_random(self, name):
+        length = self.tables[name].count - 1
+        index = randint(0 , length)
+        random = self.tables[name].phrases[index]
+        return random
