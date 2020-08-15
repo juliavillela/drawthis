@@ -27,11 +27,12 @@ class TablesController:
             #add table to dict tables
             self.tables[name] = table
 
-    def get_table(name):
-        table_dict = {'name':self.tables[name].name,
+    def get_table(self, name):
+        table_dict = {
+            'name':self.tables[name].name,
             'keys': self.tables[name].columns,
             'data': self.tables[name].list()}
         return table_dict
 
-    def create(name, data_dict):
+    def add(self, name, data_dict):
         self.tables[name].create(data_dict)
