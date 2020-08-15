@@ -48,4 +48,4 @@ def admin():
                 data.append("'" + input + "'")
         db.insert(keys, data, table_name)
 
-        return redirect("/admin")
+        return redirect("/admin?table=" + table_name)
