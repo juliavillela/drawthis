@@ -24,7 +24,7 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <input type="submit" name="{{ table['name'] }}" value="add">
+            <input type="submit" name="button" value="add">
         </form>
 
         <table class="table">
@@ -36,6 +36,13 @@
                 {% for cell in row %}
                     <td>{{ row[cell] }}</td>
                 {% endfor %}
+                    <td>
+                        <form name="delete" action="/admin" method="post">
+                            <input type="hidden" name="table_name" value="{{ table['name'] }}">
+                            <input type="hidden" name="item_id" value="{{ row['id'] }}">
+                            <input type="submit" name="button" value="delete">
+                        </form>
+                    </td>
                 </tr>
             {% endfor %}
     {% else %}

@@ -36,10 +36,12 @@ class Table:
 
         self.db.execute(query)
 
-
     def find(self, item_id):
         rows = self.db.execute("SELECT * FROM " + self.name + " WHERE id =" + str(item_id))
         if len(rows) != 1:
             return None
         else:
             return rows[0]
+
+    def destroy(self, item_id):
+        self.db.execute("DELETE FROM " + self.name + " WHERE id=" + item_id)

@@ -40,13 +40,19 @@ def admin():
 
     else:
         table_name = request.form.get("table_name")
-        input_data = {}
-        table_columns = db.tables[table_name].columns
-        for name in table_columns:
-            input = request.form.get(name)
-            if input:
-                input_data[name] = input
+        action = request.form.get("button")
+        if action == "add":
+            input_data = {}
+            table_columns = db.tables[table_name].columns
+            for name in table_columns:
+                input = request.form.get(name)
+                if input:
+                    input_data[name] = input
 
-        db.add(table_name, input_data)
+            db.add(table_name, input_data)
+
+        else:
+            item_id = request.form.get("item_id")
+            db.destroy(table_name,item_id)
 
         return redirect("/admin?table=" + table_name)

@@ -36,3 +36,6 @@ class TablesController:
 
     def add(self, name, data_dict):
         self.tables[name].create(data_dict)
+
+    def destroy(self, name, item_id):
+        self.tables[name].destroy(item_id)
