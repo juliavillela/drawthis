@@ -1,5 +1,12 @@
+:root {
+    --black : #3a3a3a;
+    --gray: grey;
+    --accent: #f32553;
+}
+
+
 body {
-    background-color: #f5f4f4;;
+    background-color: #f9f8f8;
     font-family: sans-serif;
     font-weight: normal;
     text-align: left;
@@ -9,16 +16,21 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
+    color: inherit;
 }
 
-a:hover {
+a:hover, a:focus, li:focus {
+    outline: none;
     text-decoration: none;
-    color:grey;
+    color: var(--gray);
+}
+
+a:active {
+    color: var(--accent);
 }
 
 nav {
-    background-color: #e0e0e0;
+    background-color: #eae9e9;
     padding-right: 1.5em;
     padding-left: 1.5em;
     height: 4.2em;
@@ -39,6 +51,11 @@ nav ul {
 li {
     display:inline;
     padding: 5pt;
+    color: var(--black)
+}
+
+path {
+    fill: #3a3a3a;
 }
 
 .main {
@@ -46,10 +63,29 @@ li {
     padding: 2em;
 }
 
-.center-content{
+svg.container {
+
+}
+
+.logo {
+    grid-area: header;
+    height: 100%;
+    max-width: 400px;
+    min-width: 240px;
+    justify-self: center;
+
+}
+
+/* .center-content{
     display: flex;
     justify-content: center;
     justify-items: center;
+} */
+
+.center-content {
+    display: grid;
+    grid-template-areas: '. header pageNav' '. main .';
+    max-height: 100vh;
 }
 
 .cards-container{
@@ -57,6 +93,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
+    grid-area: main;
 }
 
 .cards {
@@ -65,10 +102,28 @@ li {
     margin-bottom: 30pt;
     background-color: #fffefe;
     width: fit-content;
-    box-shadow: 7px 7px 7px 0px #dedede;
+    box-shadow: 5px 8px 11px 0px rgb(0, 0, 0, .05);
 }
 
 .cards:hover {
     transform: rotate(1.5deg);
 }
-    transform: rotate(10deg);
+
+.page-nav {
+    grid-area: pageNav;
+    justify-self: start;
+    align-self: end;
+}
+
+.toast {
+    opacity: 1;
+    display: none;
+    position: fixed;
+    right: 3em;
+    top: 4em;
+}
+
+.background {
+    position: absolute;
+    z-index: -3;
+}

@@ -12,15 +12,19 @@ from database.cards_controller import CardsController
 # Configure application
 app = Flask(__name__)
 
-#assign db source
-db = TablesController(["nouns", "adjectives", "actions", "situations"])
-draw = CardsController("en", db)
+# Ensure templates are auto-reloaded
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+# session['language'] = "en"
+#assign db source
+db = TablesController(["nouns", "adjectives", "actions", "situations"])
+draw = CardsController("en", db)
 
 #routes
 @app.route("/")
