@@ -29,6 +29,10 @@ draw = CardsController("en", db)
 #routes
 @app.route("/")
 def index():
+    new_language = request.args.get("lang")
+    if new_language:
+        draw.change_language(new_language)
+
     cards = draw.build_cards()
     return render_template("index.html", cards = cards)
 

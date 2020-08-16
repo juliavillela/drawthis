@@ -5,6 +5,9 @@ class CardsController:
         self.cards = []
         self.db.load(language)
 
+    def change_language(self, new_language):
+        self.db.load(new_language)
+
     def build_cards(self):
         _1 = self.card_1()
         _2 = self.get_random('actions')['action']
