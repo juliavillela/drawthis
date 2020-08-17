@@ -29,6 +29,10 @@ a:active {
     color: var(--accent);
 }
 
+i {
+    font-size: 20pt;
+}
+
 nav {
     background-color: #eae9e9;
     padding-right: 1.5em;
@@ -126,4 +130,22 @@ svg.container {
 .background {
     position: absolute;
     z-index: -3;
+}
+
+div #options {
+    background-color: white;
+    padding: 1em;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 3px 3px 10px 0px rgb(167 11 11 / 23%);
+    text-align: center;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background: var(--accent);
+}
+
+input[type=range]::-webkit-slider-thumb:active {
+    outline: var(--accent);
+    background: var(--accent);
 }
