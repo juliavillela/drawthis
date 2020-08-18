@@ -26,10 +26,9 @@ class TablesController:
         options = []
         for name in names:
             if filter_out:
-                options = self.filter_out(name, filter_out)
+                options.extend(self.filter_out(name, filter_out))
             else:
-                options = self.tables[name].data
-
+                options.extend(self.tables[name].data)
         random = randint(0, len(options) - 1)
         return options[random]
 
