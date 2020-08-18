@@ -18,7 +18,6 @@ class CardsPicker:
         self.card = []
         self.subject_card()
         self.complement_card()
-        print(self.card)
         return self.card
 
     def subject_card(self):
@@ -31,15 +30,18 @@ class CardsPicker:
         if self.level == 0:
             pass
         elif self.level in range(1,3):
-            if randint(0,1) == 0:
-                self.card.append(self.action())
-            else:
-                self.card.append(self.situation())
-        elif self.level == 3:
+            #get random from either actions or situations except where type = time
+            complement = self.get_random(['actions', 'situations'], {'type':'time'})
+            for col in complement:
+                if col in ['action', 'situation']:
+                    self.card.append(complement[col])
+                    break
+        else:
             self.card.append(self.action())
             self.card.append(self.situation())
-        else:
+        if level > 3:
             pass
+
 
     def subject(self, adj=False):
         noun = self.get_random(['nouns'])
@@ -52,16 +54,21 @@ class CardsPicker:
         s = " "
         return s.join(sentence)
 
+    #returns adjective dict
     def adjective(self, noun):
+        #sets filter to filter out all rows where required column in empty
         filter = {noun['require']: None}
         adjective = self.get_random(['adjectives'], filter)
+        #returns a dict with required version of adjective + position
         return {'adjective': adjective[noun['require']],
             'position': adjective['position']}
 
+    #returns action string
     def action(self):
         action = self.get_random(['actions'])
         return action['action']
 
+    #returns situation dict
     def situation(self, count=1):
         typesA = ['time', 'mood']
         typesB = ['place', 'atmosphere']
