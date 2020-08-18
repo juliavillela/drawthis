@@ -6,8 +6,8 @@ from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from database.tables_controller import TablesController
-from database.cards_picker import CardsPicker
+from db.controller import TablesController
+from db.cards_picker import CardsPicker
 
 # Configure application
 app = Flask(__name__)
@@ -23,8 +23,8 @@ Session(app)
 
 # session['language'] = "en"
 #assign db source
-db = TablesController(["nouns", "adjectives", "actions", "situations"])
-draw = CardsPicker("en", db)
+db = TablesController("_en")
+draw = CardsPicker(db)
 
 #routes
 @app.route("/")
@@ -33,7 +33,7 @@ def index():
     new_level = request.args.get("level")
 
     if new_language:
-        draw.change_language(new_language)
+        draw.change_language("_" + new_language)
     if new_level:
         draw.change_level(new_level)
 
