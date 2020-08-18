@@ -38,7 +38,8 @@ def index():
         draw.change_level(new_level)
 
     cards = draw.draw_cards()
-    return render_template("index.html", cards = cards)
+    level = draw.level
+    return render_template("index.html", cards = cards, level = level)
 
 
 @app.route("/admin", methods=["GET", "POST"])

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    <div class="center-content">
+    <div class="center-content" onload="update_slider()">
         <div class="logo">
             <div class="svg-container">
                 <?xml version="1.0" encoding="utf-8"?>
@@ -107,11 +107,11 @@
           </a>
 
           <div id="options" style="display:none;">
-              <label id=slider_label for="customRange2"></label>
+              <label id="slider_label" for="level"></label>
               <a id="change_level" href="/" style="float:right">
                   <i class="fas fa-dice"></i>
               </a>
-              <input type="range" class="custom-range" min="0" max="3" onclick="slider_label(this)">
+              <input type="range" id="slider_input" class="custom-range" value="{{ level }}" min="0" max="3" onclick="update_slider()">
           </div>
 
         </div>

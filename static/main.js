@@ -8,10 +8,11 @@ function close_alert() {
     document.querySelector("#alert").style.display = "none";
 }
 
-function slider_label(element) {
-    let lables = ["minimalist", "simple", "elaborate","quite specific","extreemly bossy"];
-    let lable = lables[element.value];
-    let href = "/?level=" + element.value;
+function update_slider() {
+    let input = document.querySelector("#slider_input")
+    let lables = ["minimalist", "basic", "fairly detailed", "quite specific", "elaborate", "a tad overdone", "extreemly bossy"];
+    let lable = lables[input.value];
+    let href = "/?level=" + input.value;
     document.querySelector("#slider_label").innerHTML = lable;
     document.querySelector("#change_level").href = href;
 }
@@ -19,6 +20,7 @@ function slider_label(element) {
 function display_options() {
     options = document.querySelector("#options")
     if (options.style.display === "none") {
+        update_slider();
         options.style.display = "block";
     } else {
         options.style.display = "none";
