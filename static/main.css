@@ -34,13 +34,14 @@ i {
 }
 
 nav {
-    background-color: #eae9e9;
+    background-color: rgb(234 233 233 / 90%);;
     padding-right: 1.5em;
     padding-left: 1.5em;
     height: 4.2em;
     display: flex;
     font-family: inherit;
     align-items: center;
+    justify-content: flex-end;
 }
 
 nav ul {
@@ -53,6 +54,7 @@ nav ul {
 }
 
 li {
+    font-style: small-caps;
     display:inline;
     padding: 5pt;
     color: var(--black)
@@ -77,14 +79,8 @@ svg.container {
     max-width: 400px;
     min-width: 240px;
     justify-self: center;
-
+    opacity: 80%
 }
-
-/* .center-content{
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-} */
 
 .center-content {
     display: grid;
@@ -128,9 +124,27 @@ svg.container {
 }
 
 .background {
-    position: absolute;
+    width: 100%;
+    height: 100%;
+    position: fixed;
     z-index: -3;
+    opacity: 80%;
 }
+
+.background .left {
+    background-image: url(../static/images/left.svg);
+    width: 42%;
+    max-width: 500px;
+    min-width: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.background .right {
+    background-image: url(../static/images/right.svg);
+    background-size: cover;
+}
+
 
 div #options {
     background-color: white;
