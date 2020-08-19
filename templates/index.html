@@ -12,29 +12,17 @@
 
 {% block main %}
     <div class="center-content">
-        <div class="logo">
-            <div class="svg-container">
-                <img src="../static/images/title_b.svg" alt="">
+        <div class="header">
+            <div class="logo">
+                <div class="svg-container">
+                    <img src="../static/images/title_b.svg" alt="">
+                </div>
+            </div>
+            <div id="dice_button">
+                <a href="/"> <i class="fas fa-dice"></i> </a>
             </div>
         </div>
-        <div id="refresh" class="page-nav" style="width: 3em">
-          <a href="/" autofocus>
-              <svg id="efffa248-7814-4d07-9f40-012019dc36e8" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 273.78 239.78"><title>dice</title><path d="M143.92,239.78a24.47,24.47,0,0,1-21.78-13.13L92,169H25.5A24.53,24.53,0,0,1,1,144.5V25.5A24.53,24.53,0,0,1,25.5,1h119A24.53,24.53,0,0,1,169,25.5V40.21L182.8,33a24.55,24.55,0,0,1,33.06,10.36L271,148.8a24.56,24.56,0,0,1-10.36,33.06L155.2,237a24.49,24.49,0,0,1-11.28,2.77ZM152.71,175a12,12,0,0,0,0,24,12,12,0,0,0,0-24ZM221,139.31a12.06,12.06,0,0,0-5.54,1.36,12,12,0,1,0,5.54-1.36ZM46.48,111.55a12,12,0,1,0,12,12A12,12,0,0,0,46.48,111.55ZM117,106.74a12,12,0,1,0,11.44,15.55A12,12,0,0,0,117,106.74ZM185.28,71a12,12,0,0,0,0,24,12,12,0,0,0,5.54-1.37A12,12,0,0,0,185.28,71ZM123.52,34.5a12,12,0,1,0,12,12A12,12,0,0,0,123.52,34.5Z" transform="translate(-0.5 -0.5)"/>
-          </a>
 
-          <a href="javascript:display_options()">
-              <i class="fas fa-wrench"></i>
-          </a>
-
-          <div id="options" style="display:none;">
-              <label id="slider_label" for="level"></label>
-              <a id="change_level" href="/" style="float:right">
-                  <i class="fas fa-dice"></i>
-              </a>
-              <input type="range" id="slider_input" class="custom-range" value="{{ level }}" min="0" max="3" onclick="update_slider()">
-          </div>
-
-        </div>
         <div id="cards" class="cards-container">
             {% for card in cards %}
             <div class="cards">
@@ -42,6 +30,20 @@
             </div>
             {% endfor %}
         </div>
+
+        <div>
+            <div id="config">
+                <a href="javascript:display_options()"> <i class="fas fa-wrench"></i> </a>
+            </div>
+            <div id="options" style="display:none;">
+                <label id="slider_label" for="level"></label>
+                <a id="change_level" href="/" style="float:right">
+                    <i class="fas fa-dice"></i>
+                </a>
+                <input type="range" id="slider_input" class="custom-range" value="3" min="0" max="5" onclick="update_slider()">
+            </div>
+        </div>
+
     </div>
 
 {% endblock %}
