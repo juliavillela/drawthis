@@ -3,11 +3,10 @@ from random import randint
 
 from db.tables import Table
 
-
 class TablesController:
     """ gets information from all table models which access the db """
     db = SQL("sqlite:///db/drawthis.db")
-    table_names = ['nouns', 'adjectives', 'actions', 'situations']
+    table_names = ['nouns', 'adjectives', 'actions', 'situations', 'instructions']
     tables = {}
     validation = {
         "require":[],

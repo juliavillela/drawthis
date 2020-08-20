@@ -37,7 +37,7 @@ def index():
     if new_level:
         draw.change_level(new_level)
 
-    cards = draw.draw_cards()
+    cards = draw.pick()
     level = draw.level
     return render_template("index.html", cards = cards, level = level)
 
