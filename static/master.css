@@ -1,0 +1,96 @@
+:root {
+    --black : #3a3a3a;
+    --background: #f9f8f8;
+    --gray: grey;
+    --accent: #f32553;
+}
+
+body {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background);
+    text-align: center;
+    margin: 0;
+    font-size: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    letter-spacing: 1pt;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover, a:focus, li:focus {
+    outline: none;
+    text-decoration: inherit;
+    color: var(--accent);
+}
+
+i {
+    font-size: 20pt;
+}
+
+img {
+    vertical-align: middle;
+    min-width: 100%;
+    height: 100%;
+}
+
+nav {
+    background-color: rgb(234 233 233 / 90%);;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    height: 4.2em;
+    display: flex;
+    font-family: inherit;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+
+ul {
+    display: inline;
+    list-style: none;
+    font-weight: 600;
+    margin: 0;
+    text-decoration: none;
+    padding: 0;
+}
+
+li {
+    font-style: small-caps;
+    display:inline;
+    padding: 5pt;
+    color: var(--black)
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+}
+
+.toast {
+    opacity: 1;
+    display: none;
+    position: fixed;
+    right: 3em;
+    top: 4em;
+}
+
+.center-content {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media only screen and (max-width:960px) {
+    nav {
+        display: none;
+    }
+}
