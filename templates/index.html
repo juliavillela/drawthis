@@ -13,14 +13,10 @@
 {% block main %}
     <div class="center-content">
         <div class="header">
-            <div class="logo">
-                <div class="svg-container">
-                    <img src="../static/images/title_b.svg" alt="">
-                </div>
+            <div id="logo">
+                <img src="../static/images/title_b.svg" alt="">
             </div>
-            <div id="dice_button">
-                <a href="/"> <i class="fas fa-dice"></i> </a>
-            </div>
+            <a id="dice_button" href="/"> <i class="fas fa-dice"></i> </a>
         </div>
 
         <div id="cards" class="cards-container">
@@ -31,16 +27,14 @@
             {% endfor %}
         </div>
 
-        <div>
-            <div id="config">
-                <a href="javascript:display_options()"> <i class="fas fa-wrench"></i> </a>
-            </div>
+        <div id="config">
+            <a href="javascript:display_options()"> <i class="fas fa-wrench"></i> </a>
             <div id="options" style="display:none;">
                 <label id="slider_label" for="level"></label>
                 <a id="change_level" href="/" style="float:right">
                     <i class="fas fa-dice"></i>
                 </a>
-                <input type="range" id="slider_input" class="custom-range" value="3" min="0" max="5" onclick="update_slider()">
+                <input type="range" id="slider_input" class="custom-range" value="{{ level }}" min="0" max="5" onclick="update_slider()">
             </div>
         </div>
 
