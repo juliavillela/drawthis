@@ -1,10 +1,27 @@
 from random import randint
 
 class CardsPicker:
+    #a dict for storing pick name and rows picked
+    pick = {}
+
+    #dict where card name correspond to an array the length of avaiable levels
+    #each value in array indicates if card should exist
+    levels_chart = {
+            #subjec values correspond to adjective draw since noun is always true
+            "subject":[False,False,True,True,True,True],
+            "complement":[False,True,True,False,False,False],
+            "action":[False,False,False,True,True,True],
+            "situation":[False,False,False,True,True,True],
+            "situation_2":[False,False,False,False,True,True],
+            "instruction":[False,False,False,False,False,True]
+            }
+
     def __init__ (self, controller):
         self.db = controller
         self.card = []
         self.level = 0
+        # array of dicts: keys identify the picks by name
+        # values is an array with 2 items: table names and filter
 
     #asks db to load new language
     def change_language(self, new_language):
@@ -14,47 +31,50 @@ class CardsPicker:
     def change_level(self, new_level):
         self.level = int(new_level);
 
-    def draw_cards(self):
+    def pick(self):
         self.card = []
-        self.subject_card()
-        self.complement_card()
+        #returns string. noun only if level is false, noun and adjective if level is true
+        subject_card = self.subject(self.lvl('subject'))
+        self.card.append(subject_card)
+
+        #return dict of row if level is true, none if level is false
+        complement = self.get_random(['actions', 'situations'], {'type':'time'}) if self.lvl('complement') else None
+        action = self.get_random(['actions']) if self.lvl('action') else None
+        situation = self.get_random(['situations']) if self.lvl('situation') else None
+        situation_2 = self.get_random(['situations'], {'type': situation['type']}) if self.lvl('situation_2') else None
+        instruction = self.get_random(['instructions']) if self.lvl('instruction') else None
+
+        #creates array cards to hold all picks
+        cards = [complement, action, situation, situation_2, instruction]
+        #names columns which should be extracte to show in view
+        main_columns = ['action', 'situation', 'instructions']
+
+        #returns string for each card that has content
+        for card in cards:
+            if card:
+                for row in card:
+                    if row in main_columns:
+                        self.card.append(card[row])
+
         return self.card
 
-    def subject_card(self):
-        if self.level < 2:
-            self.card.append(self.subject())
-        else:
-            self.card.append(self.subject(True))
-
-    def complement_card(self):
-        if self.level == 0:
-            pass
-        elif self.level in range(1,3):
-            #get random from either actions or situations except where type = time
-            complement = self.get_random(['actions', 'situations'], {'type':'time'})
-            for col in complement:
-                if col in ['action', 'situation']:
-                    self.card.append(complement[col])
-                    break
-        else:
-            self.card.append(self.action())
-            self.card.append(self.situation())
-        if level > 3:
-            pass
 
 
-    def subject(self, adj=False):
+    #selects noun and article, then calls for adjective selection(if required)
+    #returns string
+    def subject(self, has_adj):
         noun = self.get_random(['nouns'])
         sentence = [noun['article'], noun['noun']]
 
-        if adj:
+        if has_adj:
             adjective = self.adjective(noun)
             sentence = self.format_subject(noun, adjective)
 
         s = " "
         return s.join(sentence)
 
-    #returns adjective dict
+    #selects adjective according to noun and filters selected column
+    #returns dict
     def adjective(self, noun):
         #sets filter to filter out all rows where required column in empty
         filter = {noun['require']: None}
@@ -63,22 +83,8 @@ class CardsPicker:
         return {'adjective': adjective[noun['require']],
             'position': adjective['position']}
 
-    #returns action string
-    def action(self):
-        action = self.get_random(['actions'])
-        return action['action']
-
-    #returns situation dict
-    def situation(self, count=1):
-        typesA = ['time', 'mood']
-        typesB = ['place', 'atmosphere']
-        if count > 1:
-            #TBD
-            pass
-        else:
-            situation = self.get_random(['situations'])
-        return situation['situation']
-
+    #formats noun, article and adjective in correct order and adjusts article
+    #returns array of strings
     def format_subject(self, noun, adjective):
         vowels = ['a', 'e', 'i', 'o', 'u']
         sentence = []
@@ -95,6 +101,13 @@ class CardsPicker:
 
         return sentence
 
+    #in levels charts selects value corresponding to both card name and current level
+    #returns boolean
+    def lvl(self,card_name):
+        return self.levels_chart[card_name][self.level]
+
+    #calls for get_random function in db
+    #returns row dict
     def get_random(self, table_name, filter=None):
-        phrase = self.db.get_random(table_name, filter)
-        return phrase
+        row = self.db.get_random(table_name, filter)
+        return row
