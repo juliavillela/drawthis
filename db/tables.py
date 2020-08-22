@@ -9,7 +9,7 @@ class Table:
     #loads db into memory
     def load(self):
         self.data = []
-        rows = self.db.execute("SELECT * FROM " + self.name)
+        rows = self.db.execute("SELECT * FROM " + self.name + " ORDER BY id DESC")
         for row in rows:
             self.data.append(row)
 

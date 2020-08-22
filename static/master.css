@@ -14,7 +14,7 @@ body {
     margin: 0;
     font-size: 100%;
     font-family: 'Raleway', sans-serif;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 1pt;
 }
 
@@ -30,7 +30,7 @@ a:hover, a:focus, li:focus {
 }
 
 i {
-    font-size: 20pt;
+    font-size: inherit;
 }
 
 img {
@@ -70,6 +70,12 @@ li {
 .main {
     height: 100%;
     width: 100%;
+}
+
+.icon {
+    padding: .6em;
+    font-size: 12pt;
+    color: inherit;
 }
 
 .toast {

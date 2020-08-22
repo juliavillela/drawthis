@@ -19,25 +19,28 @@
             <a id="dice_button" href="/"> <i class="fas fa-dice"></i> </a>
         </div>
 
-        <div id="cards" class="cards-container">
-            {% for card in cards %}
-            <div class="cards">
-                <h4>{{ card }}</h4>
-            </div>
-            {% endfor %}
-        </div>
+        <div class="container">
 
-        <div id="config">
-            <a href="javascript:display_options()"> <i class="fas fa-wrench"></i> </a>
-            <div id="options" style="display:none;">
-                <label id="slider_label" for="level"></label>
-                <a id="change_level" href="/" style="float:right">
-                    <i class="fas fa-dice"></i>
-                </a>
-                <input type="range" id="slider_input" class="custom-range" value="{{ level }}" min="0" max="5" onclick="update_slider()">
+            <div id="cards" class="cards-container">
+                {% for card in cards %}
+                <div class="cards">
+                    <h4>{{ card }}</h4>
+                </div>
+                {% endfor %}
             </div>
-        </div>
 
+            <div id="config">
+                <a href="javascript:display_options()"> <i class="fas fa-wrench"></i> </a>
+                <div id="options" style="display:none;">
+                    <label id="slider_label" for="level"></label>
+                    <a id="change_level" href="/" style="float:right">
+                        <i class="fas fa-dice"></i>
+                    </a>
+                    <input type="range" id="slider_input" class="custom-range" value="{{ level }}" min="0" max="5" onclick="update_slider()">
+                </div>
+            </div>
+            
+        </div>
     </div>
 
 {% endblock %}

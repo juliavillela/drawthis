@@ -1,52 +1,86 @@
 {% extends "layout.html" %}
 
+{% block page_style %}
+<link rel="stylesheet" href="/static/tables.css">
+{% endblock %}
+
+
 {% block main %}
 
-<h1>ROUTE ADMIN</h1>
+<h1>- BACKSTAGE -</h1>
+    <ul>
     {% for name in table_names %}
-        <a href="/admin?table={{ name }}" method="get" name="selected_table" value="{{ name }}">{{ name }}</a>
+        <li>
+            <a href="/admin?table={{ name }}" method="get" name="selected_table" value="{{ name }}">{{ name }}</a>
+        </li>
     {% endfor %}
+    </ul>
 
     {% if table %}
+    <div class="header_table">
         <h1>{{ table['name'] }}</h1>
-        <form class="table" action="/admin" method="post" name="">
-            <input type="hidden" name="table_name" value="{{ table['name'] }}">
-            {% for key in table['keys'] %}
-                {% if key != 'id'%}
-                    {% if table['keys'][key] == None %}
-                        <input type="text" name="{{ key }}" value="" placeholder="{{ key }}">
-                    {% else %}
-                        <select name="{{ key }}">
-                            {% for option in table['keys'][key] %}
-                                <option value="{{ option }}">{{ option }}</option>
-                            {% endfor %}
-                        </select>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-            <input type="submit" name="button" value="add">
-        </form>
+        <div id="search-box">
 
-        <table class="table">
-            {% for key in table['keys'] %}
-                    <th>{{ key }}</th>
-            {% endfor %}
-            {% for row in table['data'] %}
-                <tr>
-                {% for cell in row %}
-                    <td>{{ row[cell] }}</td>
+            <input id="search_input" class="text_input" type="text" name="search" autocomplete="off">
+            <a href="javascript:search_regex()" class="icon"> <i class="fas fa-search"></i> </a>
+            <a href="javascript:end_search()" class="icon" disabled="true"> <i class="fas fa-times"></i> </a>
+        </div>
+    </div>
+
+
+        <table id="table" class="table">
+            <thead>
+                {% for key in table['keys'] %}
+                        <th>{{ key }}</th>
                 {% endfor %}
-                    <td>
-                        <form name="delete" action="/admin" method="post">
-                            <input type="hidden" name="table_name" value="{{ table['name'] }}">
-                            <input type="hidden" name="item_id" value="{{ row['id'] }}">
-                            <input type="submit" name="button" value="delete">
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
+                        <th> </th>
+            </thead>
+
+            <tr class="special">
+                <form class="table" action="/admin" method="post" name="">
+                    <input type="hidden" name="table_name" value="{{ table['name'] }}">
+                    {% for key in table['keys'] %}
+                        {% if key == 'id'%}
+                            <td>"-"</td>
+                        {% else %}
+                            {% if table['keys'][key] == None %}
+                                <td>
+                                    <input type="text" name="{{ key }}" class="text_input"  value="" placeholder="{{ key }}">
+                                </td>
+                            {% else %}
+                                    <td><select name="{{ key }}">
+                                        {% for option in table['keys'][key] %}
+                                            <option value="{{ option }}">{{ option }}</option>
+                                        {% endfor %}
+                                    </select> </td>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <td> <input type="submit" name="button" value="add"> </td>
+                </form>
+            </tr>
+
+            <tbody>
+                {% for row in table['data'] %}
+                    <tr>
+                    {% for cell in row %}
+                        <td>{{ row[cell] }}</td>
+                    {% endfor %}
+                        <td>
+                            <form name="delete" action="/admin" method="post">
+                                <input type="hidden" name="table_name" value="{{ table['name'] }}">
+                                <input type="hidden" name="item_id" value="{{ row['id'] }}">
+                                <input type="submit" name="button" value="delete">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
     {% else %}
         <h1>choose table to edit</h1>
+    </div>
+
     {% endif %}
 
 {% endblock %}
