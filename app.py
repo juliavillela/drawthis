@@ -5,7 +5,9 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+
 from cs50 import SQL
+from helpers import apology, login_required
 
 from db.controller import TablesController
 from db.cards_picker import CardsPicker
@@ -62,20 +64,20 @@ def login():
     else:
         username = request.form.get("username")
         password = request.form.get("password")
-        print(password)
         user_row = db.execute("SELECT * FROM users WHERE username = :username", username = username)
-        print(user_row)
         if len(user_row) == 1:
-            print(user_row[0]['hash'])
-            if check_password_hash(user_row[0]['hash'], password) :
+            if check_password_hash(user_row[0]['hash'], password):
                 session["user_id"] = user_row[0]["id"]
                 session["username"] = username
+                if user_row[0]["type"] == "admin":
+                    session["admin"] = True
                 return redirect("/home")
             else:
                 return redirect("/login", message = "please check password and username and try again. :)")
 
 
 @app.route("/home")
+@login_required
 def home():
     return render_template("home.html", user = session["username"])
 

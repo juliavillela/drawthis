@@ -1,8 +1,9 @@
 :root {
     --black : #3a3a3a;
     --background: #f9f8f8;
-    --gray: grey;
+    --grey: rgb(234 233 233);
     --accent: #f32553;
+    --accent-fade: #f3255363;
 }
 
 body {

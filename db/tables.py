@@ -9,9 +9,13 @@ class Table:
     #loads db into memory
     def load(self):
         self.data = []
-        rows = self.db.execute("SELECT * FROM " + self.name + " ORDER BY id DESC")
-        for row in rows:
-            self.data.append(row)
+        #makes sure table exists
+        exists = self.db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=:name", name = self.name)
+        if exists:
+            #then loads if exists
+            rows = self.db.execute("SELECT * FROM " + self.name + " ORDER BY id DESC")
+            for row in rows:
+                self.data.append(row)
 
     #adds new item to table and reloads DATA content
     def add_item(self, item_data):

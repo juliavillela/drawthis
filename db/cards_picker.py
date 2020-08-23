@@ -59,7 +59,6 @@ class CardsPicker:
         return self.card
 
 
-
     #selects noun and article, then calls for adjective selection(if required)
     #returns string
     def subject(self, has_adj):

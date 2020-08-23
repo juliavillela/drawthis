@@ -56,3 +56,12 @@ function end_search() {
     document.querySelector("#search_input").value = "";
     document.querySelector("#search-box").className = null;
 }
+
+function create_form() {
+    document.querySelector("#create_form").style.display = "grid";
+}
+
+function close_create_form() {
+    document.querySelector("#create_form").style.display= "none";
+    document.querySelector("#create_form").value = "";
+}

@@ -1,0 +1,63 @@
+.avatar-round {
+    width: 150px;
+    height: 150px;
+    border-style: solid;
+    border-color: var(--black);
+    border-radius: 50px;
+    contain: content;
+    padding: 10pt;
+}
+
+svg.svg-icon {
+    fill: none;
+    stroke: var(--black);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5pt;
+    width: 50px;
+    height: 50px;
+}
+svg.svg-icon:hover {
+    fill:var(--accent-fade);
+}
+
+.dialogue {
+    display: grid;
+    grid-template-areas:
+        'title close'
+        'description description'
+        'main main';
+    text-align: center;
+    justify-items: center;
+    background-color: var(--grey);
+    padding: 1em;
+    border-radius: 20px;
+}
+
+.dialogue-title {
+    grid-area: title;
+}
+
+.dialogue-close {
+    grid-area: close;
+}
+.dialogue-description {
+    grid-area: description;
+}
+.dialogue-main {
+    grid-area: main;
+}
+
+
+/* path.icon.dice {
+    fill:none;
+    stroke:#f32553;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-width:2px;
+}
+
+path.icon.dice.hover{
+    stroke:var(--background);
+    fill:#f32553;
+} */
