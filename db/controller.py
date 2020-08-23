@@ -1,11 +1,9 @@
-from cs50 import SQL
 from random import randint
 
 from db.tables import Table
 
 class TablesController:
     """ gets information from all table models which access the db """
-    db = SQL("sqlite:///db/drawthis.db")
     table_names = ['nouns', 'adjectives', 'actions', 'situations', 'instructions']
     tables = {}
     validation = {
@@ -15,7 +13,8 @@ class TablesController:
     }
 
     #on initialize, uses language to create table models in tables dict
-    def __init__(self, language):
+    def __init__(self, db, language):
+        self.db = db
         self.language = language
         self.load(language)
 
