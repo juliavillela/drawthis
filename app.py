@@ -1,17 +1,21 @@
 import os
 
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 
 from cs50 import SQL
 from helpers import apology, login_required
 
 from db.controller import TablesController
 from db.cards_picker import CardsPicker
+from db.images import ImagesController
 
+UPLOAD_FOLDER = 'static/images/upload'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 # Configure application
 app = Flask(__name__)
 
@@ -24,9 +28,12 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 db = SQL("sqlite:///db/drawthis.db")
 tables = TablesController(db, "_en")
 draw = CardsPicker(tables)
+images = ImagesController(db, app.config["UPLOAD_FOLDER"])
 
 #routes
 @app.route("/")
@@ -75,11 +82,32 @@ def login():
             else:
                 return redirect("/login", message = "please check password and username and try again. :)")
 
-
 @app.route("/home")
 @login_required
 def home():
     return render_template("home.html", user = session["username"])
+
+@app.route("/gallery")
+def gallery():
+    return render_template("gallery.html")
+
+@app.route("/upload")
+@login_required
+def upload_file():
+   return render_template('upload.html')
+
+@app.route('/uploader', methods = ['GET', 'POST'])
+def uploader():
+   if request.method == 'POST':
+      f = request.files['file']
+      filename = images.create(session["user_id"], ".jpg" )
+      f.save(os.path.join(images.dir, filename))
+      return redirect("/image?path=" + filename)
+
+@app.route('/image')
+def image():
+    img_path = request.args.get("path")
+    return render_template("image.html", img_path=img_path, dir = app.config["UPLOAD_FOLDER"])
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
