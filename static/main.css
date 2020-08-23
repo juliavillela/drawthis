@@ -34,6 +34,8 @@ i {
     font-size: 20pt;
 }
 
+
+
 nav {
     background-color: rgb(234 233 233 / 90%);;
     padding-right: 1.5em;
@@ -152,6 +154,11 @@ svg.container {
 .background .right {
     background-image: url(../static/images/right.svg);
     background-size: cover;
+}
+
+.icon {
+    width: 4em;
+    height: 4em;
 }
 
 div #dice_button {
