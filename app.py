@@ -51,9 +51,29 @@ def register():
         hash = generate_password_hash(password)
 
         db.execute("INSERT INTO users (username, hash, type) VALUES (:username, :hash, 'user')", username = username, hash=hash)
-        session["id"] = db.execute("SELECT id FROM users WHERE username = :username", username = username)
+        session["user_id"] = db.execute("SELECT id FROM users WHERE username = :username", username = username)
         session["username"] = username
         return redirect("/home")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        username = request.form.get("username")
+        password = request.form.get("password")
+        print(password)
+        user_row = db.execute("SELECT * FROM users WHERE username = :username", username = username)
+        print(user_row)
+        if len(user_row) == 1:
+            print(user_row[0]['hash'])
+            if check_password_hash(user_row[0]['hash'], password) :
+                session["user_id"] = user_row[0]["id"]
+                session["username"] = username
+                return redirect("/home")
+            else:
+                return redirect("/login", message = "please check password and username and try again. :)")
+
 
 @app.route("/home")
 def home():

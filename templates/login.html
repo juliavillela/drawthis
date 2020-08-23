@@ -7,7 +7,7 @@
 {% block main %}
 <div class="center-content">
 
-    <form class="basic-form" action="/register" method="post">
+    <form class="basic-form" action="/login" method="post">
 
         <div class="form-item">
             <label for="username">username:</label>
@@ -17,11 +17,7 @@
             <label for="password">password:</label>
             <input type="password" name="password" value=""placeholder="******" class="text_input">
         </div>
-        <div class="form-item">
-            <label for="password">password:</label>
-            <input type="password" name="password_confirmation" value=""placeholder="confirm password" class="text_input">
-        </div>
-        <input class="form-button" type="submit" name="submit" value="register">
+        <input class="form-button" type="submit" name="submit" value="log in">
 
     </form>
 
