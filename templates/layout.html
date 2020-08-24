@@ -26,11 +26,19 @@
                     <li> <a href="/?lang=en">en</a>
                         | <a href="/?lang=pt">pt</a>
                     </li>
+                    <li><a href="/">DRAW</a></li>
                     <li><a href="/gallery">gallery</a></li>
-                    <li><a href="/">create</a></li>
-                    <li><a href="/login">log-in</a></li>
-                    <li><a href="/">about</a></li>
                 </ul>
+                {% if session["user_id"]%}
+                    <ul>
+                        <li><a href="/home">home</a></li>
+                        <li><a href="/login">log-out</a></li>
+                    </ul>
+                {% else %}
+                    <ul>
+                        <li><a href="/login">log-in</a></li>
+                    </ul>
+                {% endif %}
             </nav>
         </header>
 
