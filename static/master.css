@@ -103,6 +103,7 @@ li {
     'in-page-header'
     'in-page-main';
     grid-template-rows: min-content auto;
+    height: 100%;
 }
 
 .vertical-content-grid {
@@ -110,6 +111,7 @@ li {
     grid-template-areas:
     'in-page-header in-page-main';
     grid-template-columns: min-content auto;
+    height: 100%;
 }
 
 .center-content {

@@ -28,3 +28,7 @@ class ImagesController:
             filename = "img" + str(row["id"]) + ".jpg"
             filenames.append(filename)
         return filenames
+
+    def filter_by_user(self, user_id):
+        rows = self.db.execute("SELECT path FROM images WHERE user_id = :user_id", user_id = user_id)
+        return rows

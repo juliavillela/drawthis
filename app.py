@@ -85,7 +85,8 @@ def login():
 @app.route("/home")
 @login_required
 def home():
-    return render_template("home.html", user = session["username"])
+    uploads = images.filter_by_user(session["user_id"])
+    return render_template("home.html", user = session["username"], uploads=uploads)
 
 @app.route("/gallery")
 def gallery():

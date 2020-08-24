@@ -28,55 +28,57 @@
 {% block main %}
 <div class="vertical-content-grid">
 
-        <div id ="user_info" style="grid-area:in-page-header">
+        <div id ="user_info" style="padding:2em; grid-area:in-page-header">
             <div class="avatar-round">
             </div>
-            <h1>Hi, {{ user }}.</h1>
-            <h3>this is home</h3>
+            <h1>hi, {{ user }}</h1>
+            <h6>this is home</h6>
         </div>
-        <div style="grid-area:in-page-main">
+        <div style="grid-area:in-page-main" class="center-content">
 
-        <div id="my-card-sets" class="user-stuff">
-            <h3>my card-sets</h3>
-            <div class="stuff-grid">
-                stuff
-                <svg class="svg-icon">
-                    <use xlink:href="#pencil"/>
-                </svg>
-                <a href="javascript:create_form()">
+            <div id="my-card-sets" class="stuff">
+                <h3>my card-sets</h3>
+                <div class="stuff-grid">
+                    stuff
                     <svg class="svg-icon">
-                        <use xlink:href="#add-button"/>
+                        <use xlink:href="#pencil"/>
                     </svg>
-                </a>
-                <div id="create_form" class="dialogue" style="display:none" autofocus>
-                    <h4 class="dialogue-title"> create new deck </h4>
-                    <a href="javascript:close_create_form()" class="dialogue-close">
+                    <a href="javascript:create_form()">
                         <svg class="svg-icon">
-                            <use xlink:href="#close"/>
+                            <use xlink:href="#add-button"/>
                         </svg>
                     </a>
-                    <p class="dialogue-description">pick a cool name for your deck :)</p>
-                    <form class="dialogue-main form" action="/create" method="post">
-                        <input type="text" class="text_input" name="title" placeholder="{{ user }}'s cards">
-                        <input type="submit" name="submit" value="go!">
-                    </form>
+                    <div id="create_form" class="dialogue" style="display:none" autofocus>
+                        <h4 class="dialogue-title"> create new deck </h4>
+                        <a href="javascript:close_create_form()" class="dialogue-close">
+                            <svg class="svg-icon">
+                                <use xlink:href="#close"/>
+                            </svg>
+                        </a>
+                        <p class="dialogue-description">pick a cool name for your deck :)</p>
+                        <form class="dialogue-main form" action="/create" method="post">
+                            <input type="text" class="text_input" name="title" placeholder="{{ user }}'s cards">
+                            <input type="submit" name="submit" value="go!">
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="saved-draws" class="user-stuff">
-            <h3>saved draws</h3>
-            <div class="stuff-grid">
-                stuff
-
-
+            <div id="saved-draws" class="stuff">
+                <h3>saved draws</h3>
+                <div class="stuff-grid">
+                    stuff
+                </div>
             </div>
-        </div>
-        <div id="my-uploads" class="user-stuff">
-            <h3>uploads</h3>
-            <div class="stuff-grid">
-                stuff
+
+            <div id="my-uploads" class="stuff">
+                <h3>uploads</h3>
+                <div class="stuff-grid">
+                    {% for upload in uploads %}
+                    <img class="thumb" src="{{ upload["path"] }}" alt="">
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+
     </div>
 </div>
 

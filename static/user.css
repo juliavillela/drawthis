@@ -47,7 +47,23 @@ svg.svg-icon:hover {
 .dialogue-main {
     grid-area: main;
 }
+.stuff {
+    width: 60%;
+}
 
+.stuff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    color: black;
+    grid-gap: 5pt;
+    height: 200px;
+}
+
+.thumb {
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: cover;
+}
 
 /* path.icon.dice {
     fill:none;
