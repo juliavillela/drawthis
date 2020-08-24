@@ -82,6 +82,12 @@ def login():
             else:
                 return redirect("/login", message = "please check password and username and try again. :)")
 
+@app.route("/logout")
+def logout():
+    session.clear();
+    return redirect("/")
+
+
 @app.route("/home")
 @login_required
 def home():
