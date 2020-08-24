@@ -11,12 +11,21 @@ body {
     height: 100%;
     width: 100%;
     background-color: var(--background);
+    display: grid;
+    grid-template-areas:
+    'header'
+    'main';
+    grid-template-rows: min-content auto;
     text-align: center;
     margin: 0;
     font-size: 100%;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
     letter-spacing: 1pt;
+}
+
+header {
+    grid-area: header;
 }
 
 a {
@@ -71,6 +80,7 @@ li {
 .main {
     height: 100%;
     width: 100%;
+    grid-area: main;
 }
 
 .icon {
@@ -85,6 +95,21 @@ li {
     position: fixed;
     right: 3em;
     top: 4em;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-areas:
+    'in-page-header'
+    'in-page-main';
+    grid-template-rows: min-content auto;
+}
+
+.vertical-content-grid {
+    display: grid;
+    grid-template-areas:
+    'in-page-header in-page-main';
+    grid-template-columns: min-content auto;
 }
 
 .center-content {

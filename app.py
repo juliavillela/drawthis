@@ -15,7 +15,7 @@ from db.cards_picker import CardsPicker
 from db.images import ImagesController
 
 UPLOAD_FOLDER = 'static/images/upload'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.gif'}
 # Configure application
 app = Flask(__name__)
 
@@ -89,7 +89,8 @@ def home():
 
 @app.route("/gallery")
 def gallery():
-    return render_template("gallery.html")
+    filenames = images.list()
+    return render_template("gallery.html", images = filenames, dir = app.config["UPLOAD_FOLDER"])
 
 @app.route("/upload")
 @login_required
@@ -99,10 +100,21 @@ def upload_file():
 @app.route('/uploader', methods = ['GET', 'POST'])
 def uploader():
    if request.method == 'POST':
-      f = request.files['file']
-      filename = images.create(session["user_id"], ".jpg" )
-      f.save(os.path.join(images.dir, filename))
-      return redirect("/image?path=" + filename)
+      #gets file from upload form
+      file = request.files['file']
+      #checks file extention
+      extention = os.path.splitext(file.filename)[1]
+      if extention not in ALLOWED_EXTENSIONS:
+          return redirect("/upload")
+      else:
+          #writes file to db, gets filename and id
+          file_db = images.create(session["user_id"], extention)
+          file_path = os.path.join(images.dir, file_db["filename"])
+          #saves file
+          file.save( file_path )
+          #updates image path in db
+          images.update(file_db["id"], file_path)
+          return redirect("/image?path=" + file_db["filename"])
 
 @app.route('/image')
 def image():

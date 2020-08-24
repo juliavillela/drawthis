@@ -1,8 +1,27 @@
 {% extends "layout.html" %}
 
+{% block page_style %}
+<link rel="stylesheet" href="/static/gallery.css">
+{% endblock %}
+
 {% block main %}
     <h1>GALLERY</h1>
-
     <a href="/upload">upload</a>
+
+    <div class="center-content">
+        <div class="gallery-grid">
+            {% for image in images %}
+                <div class="gallery-item">
+                    <div class="image-container">
+                        <img class="gallery-image" src=" {{dir}}/{{image}}" alt="image">
+                    </div>
+                    <div class="gallery-details">
+                        <h6>cards cards cards cards</h6>
+                        <p>by username</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
