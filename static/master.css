@@ -81,6 +81,7 @@ li {
     height: 100%;
     width: 100%;
     grid-area: main;
+    overflow: overlay;
 }
 
 .icon {
@@ -114,6 +115,16 @@ li {
     height: 100%;
 }
 
+.inner-header {
+    grid-area: in-page-header;
+    padding: 1em;
+}
+
+.inner-main {
+    grid-area: in-page-main;
+    overflow: scroll;
+}
+
 .center-content {
     display: flex;
     height: 100%;
@@ -126,5 +137,14 @@ li {
 @media only screen and (max-width:960px) {
     nav {
         display: none;
+    }
+
+    .vertical-content-grid {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        justify-items: center;
+        flex-direction: column;
+        align-items: center;
     }
 }

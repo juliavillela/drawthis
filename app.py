@@ -92,6 +92,7 @@ def logout():
 @login_required
 def home():
     uploads = images.filter_by_user(session["user_id"])
+    print(uploads)
     return render_template("home.html", user = session["username"], uploads=uploads)
 
 @app.route("/gallery")

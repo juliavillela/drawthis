@@ -13,9 +13,9 @@ svg.svg-icon {
     stroke: var(--black);
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-width: 1.5pt;
-    width: 50px;
-    height: 50px;
+    stroke-width: 2pt;
+    width: 25pt;
+    height: 25pt;
 }
 svg.svg-icon:hover {
     fill:var(--accent-fade);
@@ -32,6 +32,9 @@ svg.svg-icon:hover {
     background-color: var(--grey);
     padding: 1em;
     border-radius: 20px;
+    position: fixed;
+    z-index:2;
+    right: 0;
 }
 
 .dialogue-title {
@@ -48,21 +51,42 @@ svg.svg-icon:hover {
     grid-area: main;
 }
 .stuff {
-    width: 60%;
+    width: 70%;
+    min-width: 350px;
+    max-width: 800px;
+}
+
+.stuff-container {
+    overflow-y: scroll;
+    contain: layout;
 }
 
 .stuff-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    color: black;
-    grid-gap: 5pt;
+    display: inline-flex;
+    grid-template-columns: repeat(minmax(200px, 1fr));
+    grid-gap: .8em;
     height: 200px;
+    padding: .8em;
+    width: inherit;
 }
 
 .thumb {
-    max-width: 250px;
-    max-height: 250px;
-    object-fit: cover;
+    max-width: 200px;
+    max-height: 100%;
+    object-fit: scale-down;
+    border-radius: 3pt;
+    min-width: unset;
+}
+
+.user-stuff-heading {
+    grid-area: in-page-header;
+    display: flex;
+    border-top-style: groove;
+    border-top-width: thin;
+    padding-top: .6em;
+    margin-top: .6em;
+    justify-content: center;
+    align-items: center;
 }
 
 /* path.icon.dice {

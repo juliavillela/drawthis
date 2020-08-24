@@ -34,12 +34,42 @@
             <h1>hi, {{ user }}</h1>
             <h6>this is home</h6>
         </div>
+
         <div style="grid-area:in-page-main" class="center-content">
 
-            <div id="my-card-sets" class="stuff">
-                <h3>my card-sets</h3>
-                <div class="stuff-grid">
-                    stuff
+            <div id="my-card-sets" class="content-grid stuff">
+                <div class="user-stuff-heading">
+                    <h3>my card-sets</h3>
+                    <svg class="svg-icon">
+                        <use xlink:href="#pencil"/>
+                    </svg>
+                    <a href="javascript:create_form()">
+                        <svg class="svg-icon">
+                            <use xlink:href="#add-button"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="stuff-container">
+                    <div id="create_form" class="dialogue" style="display:none" autofocus>
+                        <h4 class="dialogue-title"> create new deck </h4>
+                        <a href="javascript:close_create_form()" class="dialogue-close">
+                            <svg class="svg-icon">
+                                <use xlink:href="#close"/>
+                            </svg>
+                        </a>
+                        <p class="dialogue-description">pick a cool name for your deck :)</p>
+                        <form class="dialogue-main form" action="/create" method="post">
+                            <input type="text" class="text_input" name="title" placeholder="{{ user }}'s cards">
+                            <input type="submit" name="submit" value="go!">
+                        </form>
+                    </div>
+                    <p>here you'll find your decks</p>
+                </div>
+            </div>
+
+            <div id="saved-draws" class="content-grid stuff">
+                <div class="user-stuff-heading">
+                    <h3>my saves</h3>
                     <svg class="svg-icon">
                         <use xlink:href="#pencil"/>
                     </svg>
@@ -62,20 +92,39 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            <div id="saved-draws" class="stuff">
-                <h3>saved draws</h3>
-                <div class="stuff-grid">
-                    stuff
-                </div>
+                {% if saved %}
+                    <div class="stuff-grid">
+                        {% for save in saved %}
+                        <p> {{ save }}</p>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>here you'll find your saved draws</p>
+                {% endif %}
             </div>
 
-            <div id="my-uploads" class="stuff">
-                <h3>uploads</h3>
-                <div class="stuff-grid">
-                    {% for upload in uploads %}
-                    <img class="thumb" src="{{ upload["path"] }}" alt="">
-                    {% endfor %}
+            <div id="my-uploads" class="content-grid stuff">
+                <div class="user-stuff-heading">
+                    <h3>my uploads</h3>
+                    <svg class="svg-icon">
+                        <use xlink:href="#pencil"/>
+                    </svg>
+                    <a href="/upload">
+                        <svg class="svg-icon">
+                            <use xlink:href="#add-button"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="stuff-container">
+                    {% if uploads %}
+                    <div class="stuff-grid">
+                        {% for upload in uploads %}
+                        <img class="thumb" src="{{ upload["path"] }}" alt="">
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        <p>here you can upload images</p>
+                    {% endif %}
                 </div>
             </div>
 

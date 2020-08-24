@@ -5,22 +5,28 @@
 {% endblock %}
 
 {% block main %}
-    <h1>GALLERY</h1>
-    <a href="/upload">upload</a>
+    <div class="content-grid">
+        <div class="inner-header">
+            <h1>GALLERY</h1>
+            <a href="/upload">upload</a>
+        </div>
 
-    <div class="center-content">
-        <div class="gallery-grid">
-            {% for image in images %}
-                <div class="gallery-item">
-                    <div class="image-container">
-                        <img class="gallery-image" src=" {{dir}}/{{image}}" alt="image">
-                    </div>
-                    <div class="gallery-details">
-                        <h6>cards cards cards cards</h6>
-                        <p>by username</p>
-                    </div>
+        <div class="inner-main">
+            <div class="center-content">
+                <div class="gallery-grid">
+                    {% for image in images %}
+                        <div class="gallery-item">
+                            <div class="image-container">
+                                <img class="gallery-image" src=" {{dir}}/{{image}}" alt="image">
+                            </div>
+                            <div class="gallery-details">
+                                <h6>cards cards cards cards</h6>
+                                <p>by username</p>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
         </div>
     </div>
 
