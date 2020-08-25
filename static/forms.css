@@ -1,0 +1,48 @@
+input[type="file"] {
+    background-color: #ffffff;
+    padding: 5pt;
+    border-radius: 10px;
+    display: block;
+    font-weight: 500;
+    width: 300px;
+}
+
+input[type="text"] {
+    color: var(--accent);
+    font-family: 'Cutive Mono', monospace;
+    padding: 3pt;
+    border-radius: 10px;
+    border-style: none;
+    text-align: center;
+}
+
+input[type="submit"] {
+    background-color: var(--black);
+    color: white;
+    font-weight: 700;
+    border-style: solid;
+    border-color: white;
+    padding: 5pt;
+    border-radius: 50pt;
+    box-shadow: 2px 4px 0px 0px var(--black);
+    margin: 5pt;
+    margin-top: 0;
+}
+
+input[type="submit"]:active {
+    box-shadow: none;
+    padding-top: 5pt;
+}
+
+input[type="submit"]:hover {
+    margin-top: 2pt;
+    box-shadow: 2px 2px 0px 0px var(--black);
+}
+
+label {
+    font-size: smaller;
+}
+
+form {
+
+}

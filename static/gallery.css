@@ -17,6 +17,9 @@
     text-align: center;
     height: 400px;
 }
+.gallery-item.single {
+    height: unset;
+}
 
 .image-container {
     width: 300px;
@@ -25,6 +28,12 @@
     background-color: var(--background);
     z-index: 2;
     border-radius: 5pt;
+}
+.image-container.single{
+    max-width: 500px;
+    max-height: 500px;
+    width: unset;
+    height: unset;
 }
 
 .gallery-image {
@@ -35,6 +44,10 @@
     object-fit: cover;
     border-style: inset;
     border-width: thin;
+}
+
+.gallery-image.single:{
+    object-fit: contain;
 }
 
 .gallery-details {

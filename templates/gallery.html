@@ -17,11 +17,11 @@
                     {% for image in images %}
                         <div class="gallery-item">
                             <div class="image-container">
-                                <img class="gallery-image" src=" {{dir}}/{{image}}" alt="image">
+                                <img class="gallery-image" src="{{ image['path'] }}" alt="image">
                             </div>
                             <div class="gallery-details">
-                                <h6>cards cards cards cards</h6>
-                                <p>by username</p>
+                                <h6>{{image['cards']}}</h6>
+                                <p>by {{image['user_id']}}</p>
                             </div>
                         </div>
                     {% endfor %}

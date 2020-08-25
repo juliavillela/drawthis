@@ -2,6 +2,7 @@
 
 {% block page_style %}
 <link rel="stylesheet" href="/static/tables.css">
+<link rel="stylesheet" href="/static/forms.css">
 <link rel="stylesheet" href="/static/user.css">
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -28,105 +29,115 @@
 {% block main %}
 <div class="vertical-content-grid">
 
-        <div id ="user_info" style="padding:2em; grid-area:in-page-header">
-            <div class="avatar-round">
+    <div id ="user_info" class="inner-header">
+        <div class="avatar-round">
+        </div>
+        <h1>hi, {{ user }}</h1>
+        <h6>this is home</h6>
+    </div>
+
+    <div class="inner-main center-content">
+
+        <div id="my-card-sets" class="content-grid stuff">
+            <div class="user-stuff-heading">
+                <h3>my card-sets</h3>
+                <svg class="svg-icon">
+                    <use xlink:href="#pencil"/>
+                </svg>
+                <a href="javascript:open_dialogue('new_db')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#add-button"/>
+                    </svg>
+                </a>
             </div>
-            <h1>hi, {{ user }}</h1>
-            <h6>this is home</h6>
+            <div class="stuff-container">
+                <div id="new_db" class="content-grid dialogue" style="display:none" autofocus>
+
+                    <div class="inner-header in-dialogue">
+                        <h5> create your own cards! </h5>
+                        <a href="javascript:close_dialogue('new_db')">
+                            <svg class="svg-icon">
+                                <use xlink:href="#close"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="inner-main in-dialogue">
+
+                        <form action = "/user_db" method = "POST">
+                            <label for="file"> what is this set called? </label>
+                            <input type="text" name="title" placeholder="{{ user }}'s cards">
+                            <input type="submit" name="submit" value="go!">
+                        </form>
+
+                    </div>
+                </div>
+                <p>here you'll find your decks</p>
+            </div>
         </div>
 
-        <div style="grid-area:in-page-main" class="center-content">
-
-            <div id="my-card-sets" class="content-grid stuff">
-                <div class="user-stuff-heading">
-                    <h3>my card-sets</h3>
-                    <svg class="svg-icon">
-                        <use xlink:href="#pencil"/>
-                    </svg>
-                    <a href="javascript:create_form()">
-                        <svg class="svg-icon">
-                            <use xlink:href="#add-button"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="stuff-container">
-                    <div id="create_form" class="dialogue" style="display:none" autofocus>
-                        <h4 class="dialogue-title"> create new deck </h4>
-                        <a href="javascript:close_create_form()" class="dialogue-close">
-                            <svg class="svg-icon">
-                                <use xlink:href="#close"/>
-                            </svg>
-                        </a>
-                        <p class="dialogue-description">pick a cool name for your deck :)</p>
-                        <form class="dialogue-main form" action="/create" method="post">
-                            <input type="text" class="text_input" name="title" placeholder="{{ user }}'s cards">
-                            <input type="submit" name="submit" value="go!">
-                        </form>
-                    </div>
-                    <p>here you'll find your decks</p>
-                </div>
+        <div id="saved-draws" class="content-grid stuff">
+            <div class="user-stuff-heading">
+                <h5>my saves</h5>
+                <svg class="svg-icon">
+                    <use xlink:href="#pencil"/>
+                </svg>
             </div>
+            {% if saved %}
+                <div class="stuff-grid">
+                    {% for save in saved %}
+                    <p> {{ save }}</p>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>here you'll find your saved draws</p>
+            {% endif %}
+        </div>
 
-            <div id="saved-draws" class="content-grid stuff">
-                <div class="user-stuff-heading">
-                    <h3>my saves</h3>
+        <div id="my-uploads" class="content-grid stuff">
+            <div class="user-stuff-heading">
+                <h3>my uploads</h3>
+                <svg class="svg-icon">
+                    <use xlink:href="#pencil"/>
+                </svg>
+                <a href="javascript:open_dialogue('upload')">
                     <svg class="svg-icon">
-                        <use xlink:href="#pencil"/>
+                        <use xlink:href="#add-button"/>
                     </svg>
-                    <a href="javascript:create_form()">
-                        <svg class="svg-icon">
-                            <use xlink:href="#add-button"/>
-                        </svg>
-                    </a>
-                    <div id="create_form" class="dialogue" style="display:none" autofocus>
-                        <h4 class="dialogue-title"> create new deck </h4>
-                        <a href="javascript:close_create_form()" class="dialogue-close">
+                </a>
+            </div>
+            <div class="stuff-container">
+                <div id="upload" class="content-grid dialogue" style="display:none" autofocus>
+
+                    <div class="inner-header in-dialogue">
+                        <h5> upload image </h5>
+                        <a href="javascript:close_dialogue('upload')">
                             <svg class="svg-icon">
                                 <use xlink:href="#close"/>
                             </svg>
                         </a>
-                        <p class="dialogue-description">pick a cool name for your deck :)</p>
-                        <form class="dialogue-main form" action="/create" method="post">
-                            <input type="text" class="text_input" name="title" placeholder="{{ user }}'s cards">
-                            <input type="submit" name="submit" value="go!">
+                    </div>
+                    <div class="inner-main in-dialogue">
+
+                        <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+                            <label for="file"> accepted formats: jpg, gif and png </label>
+                            <input type = "file" name = "file" value="select image"/>
+                            <input type = "submit" value="upload"/>
                         </form>
+
                     </div>
                 </div>
-                {% if saved %}
-                    <div class="stuff-grid">
-                        {% for save in saved %}
-                        <p> {{ save }}</p>
-                        {% endfor %}
-                    </div>
+
+                {% if uploads %}
+                <div class="stuff-grid">
+                    {% for upload in uploads %}
+                    <img class="thumb" src="{{ upload["path"] }}" alt="">
+                    {% endfor %}
+                </div>
                 {% else %}
-                    <p>here you'll find your saved draws</p>
+                    <p>here you can upload images</p>
                 {% endif %}
             </div>
-
-            <div id="my-uploads" class="content-grid stuff">
-                <div class="user-stuff-heading">
-                    <h3>my uploads</h3>
-                    <svg class="svg-icon">
-                        <use xlink:href="#pencil"/>
-                    </svg>
-                    <a href="/upload">
-                        <svg class="svg-icon">
-                            <use xlink:href="#add-button"/>
-                        </svg>
-                    </a>
-                </div>
-                <div class="stuff-container">
-                    {% if uploads %}
-                    <div class="stuff-grid">
-                        {% for upload in uploads %}
-                        <img class="thumb" src="{{ upload["path"] }}" alt="">
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                        <p>here you can upload images</p>
-                    {% endif %}
-                </div>
-            </div>
+        </div>
 
     </div>
 </div>

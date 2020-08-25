@@ -92,13 +92,15 @@ def logout():
 @login_required
 def home():
     uploads = images.filter_by_user(session["user_id"])
-    print(uploads)
     return render_template("home.html", user = session["username"], uploads=uploads)
 
 @app.route("/gallery")
 def gallery():
-    filenames = images.list()
-    return render_template("gallery.html", images = filenames, dir = app.config["UPLOAD_FOLDER"])
+    images_data = images.list()
+    print("-------------------")
+    print(images_data)
+    print("-------------------")
+    return render_template("gallery.html", images=images_data)
 
 @app.route("/upload")
 @login_required

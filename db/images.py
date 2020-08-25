@@ -20,14 +20,9 @@ class ImagesController:
     def update(self, image_id, image_path):
         self.db.execute("UPDATE images SET path = :path WHERE id = :id", path=image_path, id=image_id)
 
-
     def list(self):
-        rows = self.db.execute("SELECT id FROM images")
-        filenames = []
-        for row in rows:
-            filename = "img" + str(row["id"]) + ".jpg"
-            filenames.append(filename)
-        return filenames
+        rows = self.db.execute("SELECT * FROM images WHERE path NOT NULL")
+        return rows
 
     def filter_by_user(self, user_id):
         rows = self.db.execute("SELECT path FROM images WHERE user_id = :user_id", user_id = user_id)

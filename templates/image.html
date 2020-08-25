@@ -1,17 +1,21 @@
 {% extends "layout.html" %}
 {% block page_style %}
 <link rel="stylesheet" href="/static/gallery.css">
+<link rel="stylesheet" href="/static/forms.css">
 {% endblock %}
 
 {% block main %}
 <div class="center-content">
-    <div class="gallery-item">
-        <div class="image-container">
-            <img class="gallery-image" src="{{ dir }}/{{ img_path }}" alt="">
+    <div class="gallery-item single">
+        <div class="image-container single">
+            <img class="gallery-image single" src="{{ dir }}/{{ img_path }}" alt="">
         </div>
         <div class="gallery-details">
-            <h6>cards cards cards cards</h6>
-            <p>by username</p>
+            <form class="" action="index.html" method="post">
+                <input type="text" name="cards" value="" placeholder="a unicorn from the future with horrible taste">
+                <input type="text" name="" value="{{ session['username'] }}">
+                <input type="submit" name="" value="ok">
+            </form>
         </div>
     </div>
 </div>

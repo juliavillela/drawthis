@@ -65,3 +65,11 @@ function close_create_form() {
     document.querySelector("#create_form").style.display= "none";
     document.querySelector("#create_form").value = "";
 }
+
+function open_dialogue(id){
+    document.getElementById(id).style.display = "grid";
+}
+
+function close_dialogue(id) {
+    document.getElementById(id).style.display = "none";
+}
