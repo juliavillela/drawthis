@@ -6,20 +6,24 @@
 
 {% block main %}
 <div class="center-content">
-
-    <form class="basic-form" action="/login" method="post">
-
-        <div class="form-item">
-            <label for="username">username:</label>
-            <input type="text" name="username" value="" placeholder="username" class="text_input">
+        <!-- You basically need to set top and left to 50% to center the left-top corner of the div. You also need to set the margin-top and margin-left to the negative half of the div's height and width to shift the center towards the middle of the div. -->
+        <div class="form-header">
+            log in bellow
         </div>
-        <div class="form-item">
-            <label for="password">password:</label>
-            <input type="password" name="password" value=""placeholder="******" class="text_input">
-        </div>
-        <input class="form-button" type="submit" name="submit" value="log in">
+        <form class="basic-form" action="/login" method="post">
+            <div class="input-group">
+                <div class="form-item">
+                    <label for="username">username:</label>
+                    <input type="text" name="username" value="" placeholder="username" class="text_input">
+                </div>
+                <div class="form-item">
+                    <label for="password">password:</label>
+                    <input type="password" name="password" value=""placeholder="******" class="text_input">
+                </div>
+            </div>
+            <input class="form-button" type="submit" name="submit" value="log in">
 
-    </form>
+        </form>
 
 </div>
 
