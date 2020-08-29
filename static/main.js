@@ -18,13 +18,20 @@ function update_slider() {
 }
 
 function display_options() {
-    options = document.querySelector("#options")
-    if (options.style.display === "none") {
-        update_slider();
-        options.style.display = "block";
-    } else {
-        options.style.display = "none";
-    }
+    let options = document.getElementById("options");
+    let background = document.getElementById("pop-up-background");
+    update_slider();
+    background.style.display = "block";
+    background.className += " active";
+    options.style.display = "block";
+}
+
+function close_popup(popup_id){
+    let options = document.getElementById(popup_id);
+    let background = document.getElementById("pop-up-background");
+    options.style.display = "none";
+    background.className.replace("active", "");
+    background.style.display = "none";
 }
 
 function search_regex() {
@@ -57,19 +64,42 @@ function end_search() {
     document.querySelector("#search-box").className = null;
 }
 
-function create_form() {
-    document.querySelector("#create_form").style.display = "grid";
-}
-
-function close_create_form() {
-    document.querySelector("#create_form").style.display= "none";
-    document.querySelector("#create_form").value = "";
-}
-
 function open_dialogue(id){
+    document.getElementById("pop-up-background").style.display = "block"
     document.getElementById(id).style.display = "grid";
+
 }
 
 function close_dialogue(id) {
     document.getElementById(id).style.display = "none";
+    document.getElementById("pop-up-background").style.display = "none"
+}
+
+
+function edit_mode(element_id) {
+    let element = document.getElementById(element_id);
+    let parent = document.getElementById('user-stuff');
+    let siblings = parent.children
+    for (let i = 0; i < siblings.length ; i++) {
+        if (siblings[i] !== element) {
+            siblings.open = false;
+        }
+    }
+    element.open = true;
+    element.style.height = "100%"
+}
+
+function image_form(form_id, item_id){
+    let form = document.getElementById(form_id);
+    let item = document.getElementById(item_id);
+    form.innerHTML = item.cloneNode(true);
+    open_dialogue(form_id);
+}
+
+function alert() {
+    document.getElementById("alert").className += " active";
+}
+
+function close_alert() {
+    document.getElementById("alert").style.padding=0;
 }

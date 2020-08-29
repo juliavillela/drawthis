@@ -20,7 +20,6 @@
     background-size: cover;
 }
 
-
 .header{
 
     display: inline-flex;
@@ -53,6 +52,10 @@
     justify-content: space-evenly;
 }
 
+.cards-container.small {
+    height: fit-content;
+}
+
 .cards {
     font-family: 'Cutive Mono', monospace;
     padding: 3vh;
@@ -61,6 +64,34 @@
     width: fit-content;
     box-shadow: 5px 8px 11px 0px rgb(0, 0, 0, .05);
 }
+
+.instructions {
+    margin: 1pt;
+    padding: 1pt;
+    padding-right: 3pt;
+    padding-left: 3pt;
+    transform: rotate(.3deg);
+    background: var(--black);
+    color: white;
+    width: fit-content;
+    display: inline-flex;
+    box-shadow: 4px 4px 5px 0px #00000026;
+    text-shadow: 4px 2px 5px #000000ab;
+}
+
+.cards.small {
+    padding: .6vh;
+}
+
+.cards#instructions {
+    background: none;
+    box-shadow: none;
+    padding: 1pt;
+}
+.cards#instructions:hover {
+    transform: none;
+}
+
 
 #config{
     text-align: end;
@@ -79,31 +110,30 @@
     font-size: 42pt;
 }
 
+.svg-frame {
+    fill: white;
+    stroke: var(--black) position: inherit;
+    position: inherit;
+    height: inherit;
+    margin: inherit;
+    top: inherit;
+    bottom: inherit;
+    z-index: -1;
+    width: inherit;
+    height: inherit;
+}
+
 #options {
     font-weight: 600;
-    background-color: white;
     padding: 1em;
     border-radius: 10px;
     width: 250px;
-    box-shadow: 3px 3px 10px 0px rgb(167 11 11 / 23%);
+    height: 300px;
+    left: 50%;
+    top: 50%;
+    margin-top: -150px;
+    margin-left: -125px;
     text-align: center;
     position: fixed;
     z-index: 2;
-    margin-left: 450px;
-    margin-top: -8em;
-}
-
-input[type=range]::-webkit-slider-thumb {
-    --:webkit-appearance:none;
-    height: 15pt;
-    width:15pt;
-    outline: none;
-    background: var(--accent);
-}
-
-input[type=range]::-webkit-slider-thumb:active {
-    height: 17pt;
-    width: 17pt;
-    outline: var(--accent);
-    background: var(--accent);
 }
