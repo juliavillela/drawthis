@@ -9,6 +9,37 @@
     </div>
 {% endblock %}
 
+{% block pop_up %}
+
+    <div id="options" class="content-grid dialogue" style="display:none">
+        <div class="inner-heading" style="display:inline-flex">
+            <h4>Draw settings:</h4>
+            <svg class="svg-icon" onclick="close_popup('options')">
+                <use xlink:href="#close"/>
+            </svg>
+        </div>
+        <div class="inner-main">
+            <form class="" action="/" method="post">
+                <div class="input_group">
+                    <label id="slider_label" for="level"></label>
+                    <a id="change_level" href="/" style="float:right">
+                        <i class="fas fa-dice"></i>
+                    </a>
+                    <input type="range" id="slider_input" name=level value="{{ level }}" min="0" max="5" onclick="update_slider()">
+                </div>
+                <div class="input_group">
+                    <label class="switch">
+                        <input type="checkbox" name="instructions" value="True">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <input type="submit" name="button" value="submit">
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}
 
 {% block main %}
     <div class="center-content">
@@ -27,20 +58,27 @@
                     <h4>{{ card }}</h4>
                 </div>
                 {% endfor %}
+                {% if instruction %}
+                <div class="cards" id="instructions">
+                    <h6 class="instructions">DRAW THIS</h6> <h6 class="instructions">{{ instruction }}</h6>
+                </div>
+                {% endif %}
             </div>
+            <!-- {% if instruction %}
+            <div class="cards" id="instructions">
+                <h6 class="instructions">DRAW THIS</h6> <h6 class="instructions">{{ instruction }}</h6>
+            </div>
+            {% endif %} -->
 
             <div id="config">
                 <a href="javascript:display_options()"> <i class="fas fa-wrench"></i> </a>
-                <div id="options" style="display:none;">
-                    <label id="slider_label" for="level"></label>
-                    <a id="change_level" href="/" style="float:right">
-                        <i class="fas fa-dice"></i>
-                    </a>
-                    <input type="range" id="slider_input" class="custom-range" value="{{ level }}" min="0" max="5" onclick="update_slider()">
-                </div>
+                {% if session['user_id'] %}
+                <form class="" action="/save" method="post">
+                    <input type="hidden" name="cards" value="{{ cards }}">
+                    <input type="submit" name="save" value="save">
+                </form>
+                {% endif %}
             </div>
-            
-        </div>
     </div>
 
 {% endblock %}
