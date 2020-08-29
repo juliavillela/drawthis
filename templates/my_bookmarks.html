@@ -1,0 +1,32 @@
+{% extends "home_layout.html" %}
+
+{% block pop_up%}
+{% endblock %}
+
+
+{% block user_content %}
+    <details open id="my-uploads" class="content-grid stuff" style="height:100%">
+        <summary class="user-stuff-heading">
+            <h4> editing: bookmarks </h4>
+        </summary>
+        <div class="stuff-container center">
+                <div class="gallery-grid" action="home_" method="get">
+
+                    {% for item in content %}
+                        <div class="cards-container small">
+                            <div class="cards small">
+                                <h6>{{ item['cards'] }}</h6>
+                            </div>
+                            <form class="" action="/my_bookmarks" method="post">
+                                <input type="hidden" name="id" value="{{ item['id'] }}">
+                                <input type="submit" name="action" value="delete">
+                                <input type="submit" name="action" value="upload drawing">
+                            </form>
+                        </div>
+                    {% endfor %}
+            </div>
+            <div class="">
+                <p>here you can upload images</p>
+            </div>
+    </details>
+{% endblock %}
