@@ -1,38 +1,46 @@
+.background.right.home {
+    background-image: url(../static/images/home.svg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: bottom;
+    margin-top: 6em;
+}
+
 .avatar-round {
     width: 150px;
     height: 150px;
     border-style: solid;
-    border-color: var(--black);
-    border-radius: 50px;
+    border-color: var(--background);
+    border-radius: 100px;
+    border-width: 3pt;
+    background: var(--background);
     contain: content;
-    padding: 10pt;
+}
+
+img.avatar {
+    object-fit: cover;
+    height: 110%;
+    width: 110%;
 }
 
 #user-info {
-    background-color: var(--grey);
-    color: var(--black);
-    width: 100%
+    background-color: var(--black);
+    color: var(--background);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* svg.svg-icon {
+svg.svg-icon.button {
     fill: none;
-    stroke: var(--black);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2pt;
-    width: 25pt;
-    height: 25pt;
+    stroke: var(--background);
 }
-svg.svg-icon:hover {
-    fill:var(--accent-fade);
-} */
-/* .center-pop-up {
-    background-color: #80808085;
-    position: fixed;
-    z-index: 2;
-    height: 100%;
-    width: 100%;
-} */
+
+.home-icon {
+
+}
 
 .dialogue {
     background-color: var(--grey);
@@ -89,18 +97,16 @@ details summary::-webkit-details-marker {
 
 .stuff-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
-    grid-gap: .4em;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: .6em;
     height: fit-content;
-    padding: .8em;
-    width: inherit;
 }
 
 .stuff:focus .stuff-grid {
     display: grid;
 }
-
+z
 .thumb {
     max-width: 100%;
     max-height: 100%;
@@ -109,10 +115,10 @@ details summary::-webkit-details-marker {
     align-self: center;
 }
 
-.user-stuff-heading {
+/* .user-stuff-heading {
     grid-area: in-page-header;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--grey);
-}
+} */

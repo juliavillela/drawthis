@@ -47,7 +47,12 @@
             <div id="logo">
                 <img src="../static/images/title_b.svg" alt="">
             </div>
-            <a id="dice_button" href="/"> <i class="fas fa-dice"></i> </a>
+            <a id="dice_button" href="/">
+                 <!-- <i class="fas fa-dice"></i>  -->
+                 <svg class="svg-shape">
+                     <use xlink:href="#dice"/>
+                 </svg>
+             </a>
         </div>
 
         <div class="container">
@@ -71,11 +76,19 @@
             {% endif %} -->
 
             <div id="config">
-                <a href="javascript:display_options()"> <i class="fas fa-wrench"></i> </a>
+                <a href="javascript:display_options()">
+                    <svg class="svg-icon">
+                        <use xlink:href="#cogs"/>
+                    </svg>
+                </a>
                 {% if session['user_id'] %}
                 <form class="" action="/save" method="post">
                     <input type="hidden" name="cards" value="{{ cards }}">
+                    <svg class="svg-icon">
+                        <use xlink:href="#bookmark"/>
+                    </svg>
                     <input type="submit" name="save" value="save">
+
                 </form>
                 {% endif %}
             </div>

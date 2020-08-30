@@ -54,6 +54,9 @@
 
 .cards-container.small {
     height: fit-content;
+    background: rgb(234 233 233 / 27%);
+    padding: .6em;
+    border-radius: 2pt;
 }
 
 .cards {
@@ -81,6 +84,7 @@
 
 .cards.small {
     padding: .6vh;
+    margin: .4vh;
 }
 
 .cards#instructions {

@@ -74,7 +74,7 @@ li {
     font-style: small-caps;
     display:inline;
     padding: 5pt;
-    color: var(--black)
+    color: inherit;
 }
 
 .main {
