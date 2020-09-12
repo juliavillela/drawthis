@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 from cs50 import SQL
 from helpers import apology, login_required
 
-from db.controller import TablesController
+from db.main_deck import MainDeck
 from db.cards_picker import CardsPicker
 from db.deck import Deck
 
@@ -36,7 +36,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 db = SQL("sqlite:///db/drawthis.db")
 app_db = SQL("sqlite:///drawthis_app.db")
 
-tables = TablesController(db, "_en")
+tables = MainDeck(db, "_en")
 picker = CardsPicker(tables)
 ctrl = Controller(app_db)
 
