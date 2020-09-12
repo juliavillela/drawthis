@@ -15,7 +15,6 @@ class DbHelper:
             values.append(self.literal(str(data_dict[data])))
         #add item to db
         query = "INSERT INTO " + self.name + " (" + s.join(columns) + ") VALUES (" + s.join(values) + " );"
-        print(query)
         self.db.execute(query)
         id_dict = self.db.execute("SELECT last_insert_rowid()")
         id = id_dict[0].get('last_insert_rowid()')
@@ -41,15 +40,30 @@ class DbHelper:
         all = self.db.execute(query, table=self.name, value=user_id)
         return all
 
+    def all_where(self, data_dict):
+        col = ""
+        val = ""
+        for data in data_dict:
+            col = data
+            value = self.literal(data_dict.get(data))
+        query = "SELECT * FROM :table WHERE " + col + "= :value ORDER BY id DESC"
+        all = self.db.execute(query, table=self.name, value=value)
+        return all
+
     def find(self, item_id):
         query = "SELECT * FROM :table WHERE id = :id"
         item = self.db.execute(query, table=self.name, id=item_id);
         if len(item) == 1:
-            return item[0]
+            return item
         else:
             return None
 
     #inserts extra quotes in strings for the query
+    #inserts extra quotes in strings for the query
     def literal(self, string):
-        literal = "'" + string + "'"
+        literal = ""
+        if type(string) != str:
+            literal = "'"  + str(string) + "'"
+        else:
+            literal = "'" + string + "'"
         return literal
