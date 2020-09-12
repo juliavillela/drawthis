@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 from cs50 import SQL
-from helpers import apology, login_required
+from helpers import apology, login_required, admin_required
 
 from db.main_deck import MainDeck
 from db.cards_picker import CardsPicker
@@ -337,6 +337,7 @@ def save():
         return redirect("/")
 
 @app.route("/admin", methods=["GET", "POST"])
+@admin_required
 def admin():
     if request.method == "GET":
         #if user selected table, display table, else, display only table links

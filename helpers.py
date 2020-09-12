@@ -44,7 +44,7 @@ def admin_required(f):
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("admin") is False:
-            return redirect("/home")
+        if session.get("admin") != True:
+            return redirect("/")
         return f(*args, **kwargs)
     return decorated_function
