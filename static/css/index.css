@@ -7,7 +7,7 @@
 }
 
 .background .left {
-    background-image: url(../static/images/left.svg);
+    background-image: url(/static/images/left.svg);
     width: 42%;
     max-width: 500px;
     min-width: 300px;
@@ -16,12 +16,12 @@
 }
 
 .background .right {
-    background-image: url(../static/images/right.svg);
+    background-image: url(/static/images/right.svg);
     background-size: cover;
 }
 
 .pattern-background{
-    background-image: url(../static/images/pattern-noise.png);
+    background-image: url(/static/images/pattern-noise.png);
     background-size: 120px;
     background-origin: content-box;
 
