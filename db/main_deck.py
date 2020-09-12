@@ -1,7 +1,7 @@
 from random import randint
 from db.deck import Deck
 
-from db.tables_CLEAN import Table
+from db.tables import Table
 
 class MainDeck(Deck):
     """ gets information from all table models which access the db """
