@@ -1,0 +1,40 @@
+.no-hover {}
+
+.no-hover:hover, .no-hover:focus, .no-hover:focus-within, .no-hover:active{
+    background: inherit;
+    color:inherit;
+    fill: inherit;
+    stroke:inherit;
+}
+
+.turn-accent {
+    transition: color .2s
+}
+.turn-accent:hover, .turn-accent:focus, .turn-accent:focus-within, .turn-accent:active {
+    color: var(--accent);
+    fill: var(--accent);
+    outline: none;
+}
+
+.inverted.turn {
+    transition: background-color .2s
+}
+.inverted.turn.accent:hover, .inverted.turn.accent:focus, .inverted.turn.accent:focus-within, .inverted.turn.accent:active {
+    background-color: var(--accent);
+    color: var(--background);
+    outline:none;
+}
+
+.inverted.turn.discrete:hover, .inverted.turn.discrete:focus, .inverted.turn.discrete:focus-within, .inverted.turn.discrete:active {
+    background-color: var(--grey);
+    color: inherit;
+    outline:none;
+}
+
+.turn-grow {
+    transition: transform .2s;
+}
+
+.turn-grow:hover, .turn-grow:focus, .turn-grow:focus-within, .turn-grow:active {
+    transform:scale(1.1);
+}
