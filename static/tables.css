@@ -19,7 +19,33 @@ div#search-box.active{
     border-style: solid;
     border-color: var(--accent);
 }
+.form-button {
+    border-color: var(--accent);
+    color: white;
+    background-color: var(--accent);
+    letter-spacing: 1.4pt;
+    width: fit-content;
+    border-radius: 10px;
+    padding: .2em;
+    font-weight: 700;
+    padding-right: .6em;
+    padding-left: .6em;
+    box-shadow: 3px 3px 0px 0px var( --accent);
+}
 
+.form-button:disabled {
+    color: var(--black);
+    border-color: var(--grey);
+    background-color: var(--grey);
+    box-shadow: 3px 3px 0px 0px var( --grey);
+}
+
+.form-button:active {
+    box-shadow:none;
+}
+.form-button:focus {
+    transform: scale(1.1);
+}
 
 .table {
     width: 90%;
@@ -34,6 +60,18 @@ div#search-box.active{
     border-radius: 10px;
     border-style: none;
     text-align: center;
+}
+
+.text_input.issue {
+    border-style: solid;
+    color: var(--black);
+    border-color: var( --grey);
+    background-color: var( --background);
+}
+
+p.issue-text {
+    color: var(--accent);
+    margin: 3pt;
 }
 
 th {

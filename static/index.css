@@ -20,8 +20,14 @@
     background-size: cover;
 }
 
-.header{
+.pattern-background{
+    background-image: url(../static/images/pattern-noise.png);
+    background-size: 120px;
+    background-origin: content-box;
 
+}
+
+.header{
     display: inline-flex;
     align-items: center;
     max-height: 18%;
@@ -82,6 +88,19 @@
     text-shadow: 4px 2px 5px #000000ab;
 }
 
+.instructions.small {
+    display: unset;
+    font-family: 'Cutive Mono', monospace;
+    font-size: small;
+    letter-spacing: 0;
+    box-shadow: none;
+    text-shadow: none;
+}
+.instructions.light {
+    text-shadow: none;
+    background-color: var(--background);
+    color: var(--black);
+}
 .cards.small {
     padding: .6vh;
     margin: .4vh;
@@ -98,7 +117,11 @@
 
 
 #config{
-    text-align: end;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.2em;
 }
 .cards:hover {
     transform: rotate(1.5deg);
@@ -106,15 +129,20 @@
 
 #dice_button {
     display: inline-block;
-    transform: rotate(-70deg);
     float: right;
+    transition: transform .4s
 }
 
-#dice_button i {
-    font-size: 42pt;
+#dice_button:focus {
+    transform: scale(1.3);
 }
 
-.svg-frame {
+#dice_button:hover{
+    transform:scale(1.2);
+}
+
+
+/* .svg-frame {
     fill: white;
     stroke: var(--black) position: inherit;
     position: inherit;
@@ -125,18 +153,18 @@
     z-index: -1;
     width: inherit;
     height: inherit;
-}
+} */
 
 #options {
     font-weight: 600;
     padding: 1em;
     border-radius: 10px;
-    width: 250px;
-    height: 300px;
+    width: 280px;
+    height: 380px;
     left: 50%;
     top: 50%;
-    margin-top: -150px;
-    margin-left: -125px;
+    margin-top: -190px;
+    margin-left: -140px;
     text-align: center;
     position: fixed;
     z-index: 2;

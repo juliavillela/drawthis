@@ -11,6 +11,7 @@ body {
     height: 100%;
     width: 100%;
     background-color: var(--background);
+    color: var(--black);
     display: grid;
     grid-template-areas:
     'header'
@@ -22,6 +23,58 @@ body {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
     letter-spacing: 1pt;
+}
+
+.mono {
+    font-family:'Cutive Mono', monospace;
+}
+
+.inverted {
+    background-color: var(--black);
+    color: var(--background);
+}
+
+.accent {
+    color: var(--accent)
+}
+
+.color-change:hover, .color-change:focus, .color-change:focus-within, .color-change:active {
+    color: var(--accent);
+    outline: none;
+}
+
+.inverted.color-change:hover, .inverted.color-change:focus, .inverted.color-change:focus-within, .inverted.color-change:active {
+    background-color: var(--accent);
+    color: var(--background);
+    outline:none;
+}
+
+.no-hover {}
+
+.no-hover:hover, .no-hover:focus, .no-hover:focus-within, .no-hover:active{
+    background: inherit;
+    color:inherit;
+}
+
+
+.link-with-img {
+    display: grid;
+    width: 100%;
+    height: fit-content;
+    grid-gap: 2pt;
+    grid-template-areas: 'a-image a-text';
+    grid-template-columns: min-content auto;
+}
+
+.link-img {
+    grid-area: a-image;
+}
+
+.link-txt {
+    grid-area: a-text;
+}
+
+.can-collapse{
 }
 
 header {
@@ -62,7 +115,6 @@ nav {
 
 
 ul {
-    display: inline;
     list-style: none;
     font-weight: 600;
     margin: 0;
@@ -71,10 +123,10 @@ ul {
 }
 
 li {
-    font-style: small-caps;
-    display:inline;
+    display: inline-block;
     padding: 5pt;
     color: inherit;
+    vertical-align: middle;
 }
 
 .main {
@@ -96,11 +148,32 @@ svg.svg-icon {
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2pt;
+    padding: 1pt;
     width: 25pt;
     height: 25pt;
 }
+
+svg.svg-icon.tiny {
+    width: 17pt;
+    height: 17pt;
+}
+
 svg.svg-icon:hover {
     fill:var(--accent-fade);
+}
+
+svg.svg-icon.fill-cut {
+    fill: var(--black);
+    stroke: var( --background);
+    stroke-width: 1pt;
+}
+
+svg.svg-icon.fill-cut.smaller {
+    stroke-width: .1pt;
+}
+svg.svg-icon.fill-only {
+    fill: inherit;
+    stroke: var( --background);
 }
 
 svg.svg-shape {
@@ -111,17 +184,32 @@ svg.svg-shape {
     stroke-width: 3pt;
 }
 
+svg.svg-shape.dice {
+    width: 60px;
+    height: 80px;
+    stroke: none;
+    margin-top: -4em;
+    margin-right: -30px;
+}
+
 svg.svg-shape:hover {
     fill: var(--accent);
     stroke: var(--accent);
 }
 
-.toast {
-    opacity: 1;
-    display: none;
-    position: fixed;
-    right: 3em;
-    top: 4em;
+svg.svg-shape.dice:hover {
+    stroke:none;
+    fill:inherit;
+}
+
+svg.svg-shape.dice:active {
+    stroke:none;
+    fill:var(--accent);
+}
+
+
+svg.black {
+    stroke: var(--black)
 }
 
 .content-grid {
@@ -137,7 +225,8 @@ svg.svg-shape:hover {
     display: grid;
     grid-template-areas:
     'in-page-header in-page-main';
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 272px auto;
+    grid-column-gap: 2em;
     height: 100%;
 }
 
@@ -160,27 +249,27 @@ svg.svg-shape:hover {
     align-items: center;
 }
 
-@keyframes fade-in {
-    from: {opacity: 0;}
-    to: {opacity: 1;}
-}
-
 .center-pop-up {
     background-color: #80808085;
     position: fixed;
     z-index: 2;
     height: 100%;
     width: 100%;
-    transition: opacity .3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.center-pop-up.active {
-    animation-name: fade-in;
-    animation-duration: 1s;
+.grid-2-300{
+    display: grid;
+    grid-template-columns: 300px 300px;
+    grid-template-areas: 'about ex';
+    grid-gap: 2em;
+    padding: 1em;
 }
 
 .alert {
-    background-color: var(--accent-fade);
+    background-color: rgb(236 236 236 / 75%);
     padding: 0;
     transform-origin: top;
     transition: padding .3s;
@@ -188,21 +277,125 @@ svg.svg-shape:hover {
     height: 0;
     width: 100%;
     contain: strict;
+    z-index:3;
 }
 
+.alert-content {
+    background: var(--background);
+    padding: .2em;
+    padding-left: .8em;
+    padding-right: 0;
+    border-radius: 20pt;
+}
 
+.pop-up {
+    font-weight: 600;
+    padding: 1em;
+    border-radius: 10px;
+    width: 280px;
+    height: 380px;
+    left: 50%;
+    top: 50%;
+    margin-top: -190px;
+    margin-left: -140px;
+    text-align: center;
+    position: fixed;
+    z-index: 2;
+    background: var(--grey)
+}
+
+.pop-up-xl {
+    width: min-content;
+    max-width: 95%;
+    height: min-content;
+    background: var(--background);
+    padding: 1em;
+    border-radius: 10pt;
+}
+
+.tab-button {
+    background: var(--grey);
+    color: var(--black);
+    padding-right: 1em;
+    padding-left: 1em;
+    margin-right: 1em;
+    border-top-left-radius: 3pt;
+    border-top-right-radius: 3pt;
+}
+
+.tab-button.active {
+    background: var(--black);
+    color: var(--background);
+}
 
 @media only screen and (max-width:960px) {
-    nav {
-        display: none;
+    h4 {
+        font-size: 1.2rem;
     }
 
-    .vertical-content-grid {
+    /* .vertical-content-grid {
         display: flex;
         height: 100%;
         justify-content: center;
         justify-items: center;
         flex-direction: column;
         align-items: center;
+    } */
+}
+
+
+@media only screen and (max-width: 960px){
+    .dec {
+        display: none;
+    }.grid-2-300 {
+        grid-template-columns: 1fr;
     }
+}
+
+@media only screen and (min-device-width: 481px) {
+    .mobile-only {
+        display:none;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    nav {
+        height: 2.5em;
+        padding: 0;
+    } .can-collapse {
+        display: none;
+    } .can0margin {
+        margin:0;
+    } #user-info {
+        position: fixed;
+        z-index: 4;
+        height: 100%;
+    } .vertical-content-grid {
+        display: grid;
+        grid-template-areas: 'in-page-main';
+        grid-template-columns: auto;
+        grid-column-gap: 0;
+        height: 100%;
+}
+
+
+@media only screen and (min-width: 1440px) {
+    /* styles for browsers larger than 1440px; */
+}
+@media only screen and (min-width: 2000px) {
+    /* for sumo sized (mac) screens */
+}
+@media only screen and (max-device-width: 480px) {
+   /* styles for mobile browsers smaller than 480px; (iPhone) */
+}
+@media only screen and (device-width: 768px) {
+   /* default iPad screens */
+}
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  /* For portrait layouts only */
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  /* For landscape layouts only */
 }

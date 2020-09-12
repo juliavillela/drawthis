@@ -1,13 +1,13 @@
-.background.right.home {
+/* .background.right.home {
     background-image: url(../static/images/home.svg);
     background-size: auto;
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: bottom;
     margin-top: 6em;
-}
+} */
 
-.avatar-round {
+#avatar{
     width: 150px;
     height: 150px;
     border-style: solid;
@@ -25,21 +25,57 @@ img.avatar {
 }
 
 #user-info {
-    background-color: var(--black);
-    color: var(--background);
+    width: 272px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    padding-top: 2em;
+    margin-left: 0;
+    transition: margin-left 1s;
+}
+
+#user-info ul {
     width: 100%;
+}
+
+#user-info ul li {
+    display: block;
+    padding-right: 3em;
+    padding-left: 3em;
+}
+
+/* #user-info ul li:hover, #user-info ul li:focus-within{
+    background-color: var(--accent);
+}
+
+#user-info ul li a:hover, #user-info ul li a:focus {
+    color: var(--background);
+} */
+
+#profile {
+    padding: .6em;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-svg.svg-icon.button {
+.block {
+    margin-bottom: .7em;
+    margin-top: .7em;
+}
+
+.separator{
+    width: 200px;
+    height: 10px;
+    stroke-width: 0.7pt;
     fill: none;
     stroke: var(--background);
 }
 
-.home-icon {
-
+svg.svg-icon.button {
+    fill: none;
+    stroke: var(--background);
 }
 
 .dialogue {
@@ -73,7 +109,7 @@ ul.inner-main.center-content {
 }
 
 
-details.content-grid {
+/* details.content-grid {
     --webkit-decoration:none;
     width: 70%;
     padding:0;
@@ -88,7 +124,7 @@ details.content-grid {
 
 details summary::-webkit-details-marker {
   display:none;
-}
+} */
 
 .stuff-container {
     overflow-y: scroll;
@@ -98,15 +134,15 @@ details summary::-webkit-details-marker {
 .stuff-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+    /* grid-template-rows: repeat(auto-fill, minmax(300px, 1fr)); */
     grid-gap: .6em;
     height: fit-content;
 }
 
-.stuff:focus .stuff-grid {
+/* .stuff:focus.stuff-grid {
     display: grid;
-}
-z
+} */
+
 .thumb {
     max-width: 100%;
     max-height: 100%;
@@ -115,6 +151,12 @@ z
     align-self: center;
 }
 
+.home-titles {
+    margin-bottom: 2em;
+    padding: .6em;
+}
+.dec {
+}
 /* .user-stuff-heading {
     grid-area: in-page-header;
     display: flex;
@@ -122,3 +164,51 @@ z
     align-items: center;
     background-color: var(--grey);
 } */
+
+
+@media only screen and (max-width:960px) {
+    /* #user-info {
+        position: fixed;
+        z-index: 4;
+        height: 100%;
+    } .vertical-content-grid {
+        display: grid;
+        grid-template-areas: 'in-page-main';
+        grid-template-columns: auto;
+        grid-column-gap: 0;
+        height: 100%;
+    } .dec {
+        display: none;
+    } .grid-2-300 {
+        grid-template-columns: 1fr;
+    } */
+}
+
+@media only screen and minmax()
+
+/* default styles here for older browsers.
+   I tend to go for a 600px - 960px width max but using percentages
+*/
+@media only screen and (min-width: 960px) {
+    /* styles for browsers larger than 960px; */
+}
+@media only screen and (min-width: 1440px) {
+    /* styles for browsers larger than 1440px; */
+}
+@media only screen and (min-width: 2000px) {
+    /* for sumo sized (mac) screens */
+}
+@media only screen and (max-device-width: 480px) {
+   /* styles for mobile browsers smaller than 480px; (iPhone) */
+}
+@media only screen and (device-width: 768px) {
+   /* default iPad screens */
+}
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  /* For portrait layouts only */
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  /* For landscape layouts only */
+}
