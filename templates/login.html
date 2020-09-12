@@ -5,26 +5,34 @@
 {% endblock %}
 
 {% block main %}
-<div class="center-content">
-        <!-- You basically need to set top and left to 50% to center the left-top corner of the div. You also need to set the margin-top and margin-left to the negative half of the div's height and width to shift the center towards the middle of the div. -->
-        <div class="form-header">
-            log in bellow
-        </div>
-        <form class="basic-form" action="/login" method="post">
-            <div class="input-group">
-                <div class="form-item">
-                    <label for="username">username:</label>
-                    <input type="text" name="username" value="" placeholder="username" class="text_input">
-                </div>
-                <div class="form-item">
-                    <label for="password">password:</label>
-                    <input type="password" name="password" value=""placeholder="******" class="text_input">
-                </div>
+    <div class="center-content">
+        <div class="content-grid" style ="max-width:500px; height:auto;">
+            <div class="inner-header inverted">
+                <h3>Hello there!</h3>
+                <h6>please log in bellow</h6>
             </div>
-            <input class="form-button" type="submit" name="submit" value="log in">
+            <div class="inner-main" style="border-style: solid; border-color: var(--black); margin-bottom:1em;">
+                <form class="box can0margin" action="/login" method="post">
 
-        </form>
+                    <div id="username" class="form-item">
+                        <label for="username">username:</label>
+                        <input autofocus onblur="none_empty()" type="text" name="username" value="" placeholder="username" autocomplete="username" class="text_input">
+                        <p class="issue-text"></p>
+                    </div>
+                    <div id="password" class="form-item">
+                        <label for="password">password:</label>
+                        <input onblur="none_empty()" value="" type="password" name="password" value="" placeholder="password" autocomplete="current-password" class="text_input">
+                        <p class="issue-text"></p>
+                    </div>
 
-</div>
+                    <input id="submit" disabled class="form-button" type="submit" name="submit" value="login">
+
+                </form>
+                <h6>don't have an account? <a href="/register"> register here :)</a>
+                </h6>
+            </div>
+            <p style="font-size:smaller">please beware of adding any kind of sensitive content to this website. i will try and make it safer when i learn how :)</p>
+        </div>
+    </div>
 
 {% endblock %}

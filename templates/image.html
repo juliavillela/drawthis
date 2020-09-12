@@ -12,14 +12,20 @@
             <div class="image-container single">
                 <img class="gallery-image single" src="{{ image['path']}}" alt="">
             </div>
-            <div class="gallery-details">
+            <div id="cards_section" class="gallery-details">
                 <input type="hidden" name="image_id" value="{{ image['id']}}">
-                    {% if image['cards']%}
-                        {% for card in image['cards'] %}
-                            <input type="text-area" name="cards" value="{{ card }}" placeholder="manually add the cards">
-                        {% endfor %}
-                    {% endif %}
-                    <input type="text-area" name="cards" value="{{ card }}" placeholder="manually add the cards">
+                {% if image['cards']%}
+                    {% for card in image['cards'] %}
+                        <input type="text-area" name="cards" value="{{ card }}" placeholder="manually add the cards">
+                    {% endfor %}
+                {% else %}
+                    <input id="card_input" type="text-area" name="card_1" placeholder="which cards did you draw from?">
+                    <a href="javascript:add_card_input()">
+                        <svg class="svg-icon">
+                            <use xlink:href="#add_button"/>
+                        </svg>
+                    </a>
+                {% endif %}
             </div>
         </div>
         <input type="submit" name="button" value="update">

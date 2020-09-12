@@ -1,0 +1,133 @@
+{% extends "home_layout.html" %}
+
+{% block pop_up%}
+    <div id="edit-username" class="content-grid pop-up" style="display:none" autofocus>
+        <div class="inner-header in-dialogue">
+            <h5> edit username </h5>
+            <a href="javascript:close_dialogue('edit-username')">
+                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                    <use xlink:href="#close2"/>
+                </svg>
+            </a>
+        </div>
+        <div class="inner-main in-dialogue">
+            <form id="username-edit" action= "/my_settings" method = "POST">
+                <div id="username" class="form-item">
+                    <label for="username">new username:</label>
+                    <input onfocus="clear_issues('username')" onblur="username_unique(this, {{ usernames }})" type="text" name="username" autocomplete="username" value="" placeholder="new username" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+                <div id="validate" class="form-item block" style="background: var(--background);padding: .4em; color:var(--accent); border-radius:10px;">
+                    <label for="username">to authorize change, please insert your current password :)</label>
+                    <input onblur="none_empty()" type="password" name="validate" autocomplete="current-password" value="" placeholder="current password" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+                <input id="submit" disabled class="form-button" type="submit" name="action" value="username">
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-password" class="content-grid pop-up" style="display:none" autofocus>
+        <div class="inner-header in-dialogue">
+            <h5> edit password </h5>
+            <a href="javascript:close_dialogue('edit-password')">
+                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                    <use xlink:href="#close2"/>
+                </svg>
+            </a>
+        </div>
+        <div class="inner-main in-dialogue">
+            <form id="password-edit" action = "/my_settings" method = "POST">
+                <div id="password" class="form-item">
+                    <label for="password">new password:</label>
+                    <input onblur="password_match()" autocomplete="new-password" value="" type="password" name="password" value="" placeholder="new password" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+
+                <div id="password-confirmation"class="form-item">
+                    <label for="password"> new password:</label>
+                    <input onfocus="clear_issues('password-confirmation')" onblur="password_match()" autocomplete="new-password" type="password" name="password_confirmation" value="" placeholder="confirm new password" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+
+                <div id="validate" class="form-item block" style="background: var(--background);padding: .4em; color:var(--accent); border-radius:10px;">
+                    <label for="username">to authorize change, please insert your current password :)</label>
+                    <input type="password" onblur="none_empty()" name="validate" autocomplete="current-password" value="" placeholder="current password" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+
+                <input id="submit" disabled class="form-button" type="submit" name="action" value="change password">
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block user_content %}
+
+    <div class="content-grid" style="width:100%; height:100%">
+        <div class="inner-heading home-titles inverted">
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+            <h4 style="display:inline;"> account settings </h4>
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+        </div>
+
+        <div class="inner-main center-content">
+            <table class="table" style="width:fit-content; box-shadow: 8px 9px 0px 2px #4c4c4c;">
+            <tr>
+                <td><h5><strong>avatar image:</strong></h5></td>
+
+                <td class="center-content">
+                    <div id="avatar" style="border-color:var(--black); width:100px; height:100px">
+                        <img class="avatar" src="{{session['avatar']}}" alt="">
+                    </div>
+                </td>
+                <td><form action="/my_settings" method="post">
+                    <div class="image-submit">
+                        <input type="submit" name="action" value="avatar">
+                        <svg class="svg-icon fill-only">
+                            <use xlink:href="#dice"/>
+                        </svg>
+                    </div>
+                </form> </td>
+            </tr>
+
+            <tr>
+                <td><h5><strong>username:</strong></h5></td>
+                <td><h5>{{ session['username'] }}</h5></td>
+                <td><a href="javascript:open_form_dialogue('edit-username', 'username-edit')"">
+                    <svg class="svg-icon">
+                        <use xlink:href="#pencil"/>
+                    </svg>
+                </a></td>
+            </tr>
+
+            <tr>
+                <td><h5><strong>password:</strong></h5></td>
+                <td><h5>********</h5></td>
+                <td><a href="javascript:open_form_dialogue('edit-password', 'password-edit')">
+                    <svg class="svg-icon">
+                        <use xlink:href="#pencil"/>
+                    </svg>
+                </a></td>
+            </tr>
+
+            </table>
+            <table class="table" style="margin-top: 3em; width:fit-content;">
+                <td><h6>delete my account</h6></td>
+                <td><a href="javascript:open_dialogue('#')">
+                    <svg class="svg-icon fill-cut smaller">
+                        <use xlink:href="#trash"/>
+                    </svg>
+                </a></td>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

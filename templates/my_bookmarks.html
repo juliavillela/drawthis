@@ -5,28 +5,50 @@
 
 
 {% block user_content %}
-    <details open id="my-uploads" class="content-grid stuff" style="height:100%">
-        <summary class="user-stuff-heading">
-            <h4> editing: bookmarks </h4>
-        </summary>
-        <div class="stuff-container center">
-                <div class="gallery-grid" action="home_" method="get">
+    <div class="content-grid" style="width:100%; height:100%">
+        <div class="inner-heading home-titles inverted">
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+            <svg class="svg-icon button" class="inner-header">
+                <use xlink:href="#bookmark"/>
+            </svg>
+            <h4 style="display:inline;"> bookmarks </h4>
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+        </div>
 
+        <div class="inner-main">
+                <div class="stuff-grid" action="home_" method="get">
+                {% if content %}
                     {% for item in content %}
                         <div class="cards-container small">
-                            <div class="cards small">
-                                <h6>{{ item['cards'] }}</h6>
-                            </div>
                             <form class="" action="/my_bookmarks" method="post">
                                 <input type="hidden" name="id" value="{{ item['id'] }}">
                                 <input type="submit" name="action" value="delete">
                                 <input type="submit" name="action" value="upload drawing">
                             </form>
+                            {% for card in item['cards'] %}
+                                <div class="cards small">
+                                    <h6>{{ card }}</h6>
+                                </div>
+                            {% endfor %}
                         </div>
                     {% endfor %}
             </div>
+            {% else %}
             <div class="">
-                <p>here you can upload images</p>
+                <div class="cards-container small">
+                    <h6>to add bookmarks, go to:</h6>
+                    <a href="/">
+                        <svg class="svg-shape">
+                            <use xlink:href="#title"/>
+                        </svg>
+                    </a>
+                    <h6> then click the bookmark icon at the bottom of the screen when you find a set of cards you want to save for later</h6>
+                </div>
             </div>
-    </details>
+            {% endif %}
+    </div>
 {% endblock %}

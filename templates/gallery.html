@@ -20,8 +20,10 @@
                                 <img class="gallery-image" src="{{ image['path'] }}" alt="image">
                             </div>
                             <div class="gallery-details">
-                                <h6>{{image['cards']}}</h6>
-                                <p>by {{image['user_id']}}</p>
+                                {% for card in image['cards'] %}
+                                    <h6 class="instructions small">{{card}}</h6>
+                                {% endfor %}
+                                <h6 class="mono" style="float:right">by {{ image['username'] }}</h6>
                             </div>
                         </div>
                     {% endfor %}

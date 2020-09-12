@@ -12,33 +12,65 @@
 {% block pop_up %}
 
     <div id="options" class="content-grid dialogue" style="display:none">
-        <div class="inner-heading" style="display:inline-flex">
-            <h4>Draw settings:</h4>
-            <svg class="svg-icon" onclick="close_popup('options')">
-                <use xlink:href="#close"/>
+        <div class="inner-header" style="padding:0;">
+            <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                <use xlink:href="#close2"/>
             </svg>
         </div>
-        <div class="inner-main">
-            <form class="" action="/" method="post">
-                <div class="input_group">
-                    <label id="slider_label" for="level"></label>
-                    <a id="change_level" href="/" style="float:right">
-                        <i class="fas fa-dice"></i>
-                    </a>
-                    <input type="range" id="slider_input" name=level value="{{ level }}" min="0" max="5" onclick="update_slider()">
-                </div>
-                <div class="input_group">
-                    <label class="switch">
-                        <input type="checkbox" name="instructions" value="True">
-                        <span class="slider"></span>
-                    </label>
+
+            <form id="draw-settings" class="block inner-main" style="width:100%; height:380px;" action="{{ details['action'] }}" method="post">
+
+                <div class="block form-info">
+                    <h6 id="detail-block" class="input-title">level of detail: </h6>
+                    <div class="input-area">
+                        <input type="hidden" name="curr_level" value="{{details['level']}}">
+                        <label id="slider_label" for="level"></label>
+                        <input type="range" id="slider_input" name="level" value="3" min="0" max= "{{details['max-level']}}" onchange="update_slider()" style="margin:0">
+                    </div>
                 </div>
 
+                <div id="language-block" class="block form-info inline">
+                    <h6 class="input-title inline">language: </h6>
+                    <div class="input-area">
+                        <input type="hidden" name="curr_language" value="{{details['language']}}">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="language" id="en" value="_en">
+                            <label class="form-check-label" for="language">en</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="language" id="pt" value="_pt">
+                            <label class="form-check-label" for="language">pt</label>
+                        </div>
+                    </div>
+                </div>
+
+                {% if session['decks']%}
+                <div id="deck-block" class="block form-info">
+                    <div class="input-title" style="border-radius:10pt">
+                        <input id="toggle-decks" class="form-check-input" type="checkbox" name="custom-deck" value="True" onchange="custom_deck()">
+                        <label class="form-check-label" for="deck">
+                          draw from my own decks
+                        </label>
+                    </div>
+
+                    <div class="input-area" style="display:none">
+                        <input id="deck-curr" type="hidden" name="curr_deck" value="{{ details['deck']}}">
+                        {% for deck in session['decks']%}
+                            <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="deck" value="{{deck['id']}}">
+                                  <label class="form-check-label" for="deck">
+                                    {{deck['name']}}
+                                  </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
                 <input type="submit" name="button" value="submit">
             </form>
         </div>
-    </div>
-    </div>
+
+
 {% endblock %}
 
 {% block main %}
@@ -47,9 +79,9 @@
             <div id="logo">
                 <img src="../static/images/title_b.svg" alt="">
             </div>
-            <a id="dice_button" href="/">
+            <a id="dice_button" href="{{ details['action'] }}">
                  <!-- <i class="fas fa-dice"></i>  -->
-                 <svg class="svg-shape">
+                 <svg class="svg-shape dice">
                      <use xlink:href="#dice"/>
                  </svg>
              </a>
@@ -69,27 +101,23 @@
                 </div>
                 {% endif %}
             </div>
-            <!-- {% if instruction %}
-            <div class="cards" id="instructions">
-                <h6 class="instructions">DRAW THIS</h6> <h6 class="instructions">{{ instruction }}</h6>
-            </div>
-            {% endif %} -->
 
             <div id="config">
-                <a href="javascript:display_options()">
-                    <svg class="svg-icon">
+                <a href="javascript:display_options()" class="turn-grow">
+                    <svg class="svg-icon fill-cut">
                         <use xlink:href="#cogs"/>
                     </svg>
                 </a>
                 {% if session['user_id'] %}
-                <form class="" action="/save" method="post">
-                    <input type="hidden" name="cards" value="{{ cards }}">
-                    <svg class="svg-icon">
-                        <use xlink:href="#bookmark"/>
-                    </svg>
-                    <input type="submit" name="save" value="save">
-
-                </form>
+                <div class="image-submit turn-grow">
+                    <form action="/save" method="post">
+                        <input type="hidden" name="cards" value="{{ cards }}">
+                        <input type="submit" name="save" value="save" style="opacity:0; position:fixed;">
+                        <svg class="svg-icon fill-cut">
+                            <use xlink:href="#bookmark"/>
+                        </svg>
+                    </form>
+                </div>
                 {% endif %}
             </div>
     </div>

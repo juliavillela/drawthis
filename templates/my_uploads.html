@@ -1,0 +1,82 @@
+{% extends "home_layout.html" %}
+
+{% block pop_up%}
+    <div id="upload" class="content-grid pop-up" style="display:none" autofocus>
+
+        <div class="inner-header in-dialogue">
+            <h5> upload image </h5>
+            <a href="javascript:close_dialogue('upload')">
+                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                    <use xlink:href="#close2"/>
+                </svg>
+            </a>
+        </div>
+        <div class="inner-main in-dialogue">
+
+            <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+                <label for="file"> accepted formats: jpg, gif and png </label>
+                <input type = "file" name = "file" value="select image"/>
+                <input class="form-button" style="margin-top:2em" type = "submit" value="upload"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block user_content %}
+    <div class="content-grid" style="width:100%; height:100%">
+        <div class="inner-heading home-titles inverted">
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+            <svg class="svg-icon button" class="inner-header">
+                <use xlink:href="#photo"/>
+            </svg>
+            <h4 style="display:inline;"> uploads </h4>
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+        </div>
+            <div class="inner-main">
+                <div class="gallery-grid small" action="home_" method="get">
+                    <a href="javascript:open_dialogue('upload')">
+                        <div class="gallery-item small">
+                            <div class="image-container small center-content">
+                                    <svg class="svg-icon">
+                                        <use xlink:href="#add_button"/>
+                                    </svg>
+                                    <h6>add new!</h6>
+                            </div>
+                            <div class="gallery-details small">
+                                <!-- empty -->
+                            </div>
+                        </div>
+                    </a>
+                {% if content %}
+                    {% for item in content %}
+                        {% if item['path']%}
+                        <a href="/image?img={{ item['id'] }}">
+                            <div id="{{ item['id'] }}"class="gallery-item small">
+                                <div class="image-container small">
+                                        <img class="gallery-image" src="./{{ item['path'] }}" alt="" name="item" value="{{ item['id'] }}">
+                                </div>
+                                <div class="gallery-details small">
+                                    {% for card in item['cards'] %}
+                                    <h6 class="instructions small" >{{card}}</h6>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+            {% else %}
+            <div class="">
+                <h6 class="instructions">upload</h6>
+                <h6 class="instructions">your creations</h6>
+                <h6 class="instructions">and display them</h6>
+                <h6 class="instructions">in the gallery!</h6>
+            </div>
+            {% endif %}
+    </div>
+{% endblock %}

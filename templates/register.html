@@ -6,25 +6,42 @@
 
 {% block main %}
 <div class="center-content">
-
-    <form class="basic-form" action="/register" method="post">
-
-        <div class="form-item">
-            <label for="username">username:</label>
-            <input type="text" name="username" value="" placeholder="username" class="text_input">
+    <div class="content-grid" style ="max-width:500px; height:auto;">
+        <div class="inner-header inverted">
+            <h3>Create an account</h3>
+            <h6>when logged in you can:</h6>
+            <ul>
+                <li class="instructions light">create your own deck of cards</li>
+                <li class="instructions light">upload drawings to the gallery</li>
+                <li class="instructions light">bookmark draws and draw them latter</li>
+            </ul>
         </div>
-        <div class="form-item">
-            <label for="password">password:</label>
-            <input type="password" name="password" value=""placeholder="******" class="text_input">
-        </div>
-        <div class="form-item">
-            <label for="password">password:</label>
-            <input type="password" name="password_confirmation" value=""placeholder="confirm password" class="text_input">
-        </div>
-        <input class="form-button" type="submit" name="submit" value="register">
+        <div class="inner-main" style="border-style: solid; border-color: var(--black); margin-bottom:1em;">
+            <form class="box can0margin" action="/register" method="post">
 
-    </form>
+                <div id="username" class="form-item">
+                    <label for="username">username:</label>
+                    <input onfocus="clear_issues('username')" onblur="username_unique(this, {{ usernames }})" type="text" name="username" value="" placeholder="username" autocomplete="username" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+                <div id="password" class="form-item">
+                    <label for="password">password:</label>
+                    <input onblur="password_match()" value="" type="password" name="password" value="" placeholder="password" autocomplete="new-password" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+                <div id="password-confirmation"class="form-item">
+                    <label for="password">password:</label>
+                    <input onfocus="clear_issues('password-confirmation')" onblur="password_match()" type="password" name="password_confirmation" value=""placeholder="confirm password" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+                <input id="submit" disabled class="form-button" type="submit" name="submit" value="register">
 
+            </form>
+            <h6>already have an account? <a href="/login"> log in here :)</a>
+            </h6>
+        </div>
+        <p style="font-size:smaller">please beware of adding any kind of sensitive content to this website. i will try and make it safer when i learn how :)</p>
+    </div>
 </div>
 
 {% endblock %}

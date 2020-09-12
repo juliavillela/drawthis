@@ -1,0 +1,113 @@
+{% extends "home_layout.html" %}
+
+{% block pop_up%}
+    <div id="new_db" class="content-grid pop-up" style="display:none" autofocus>
+
+        <div class="inner-header in-dialogue">
+            <h5> create your own cards! </h5>
+            <a href="javascript:close_dialogue('new_db')">
+                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                    <use xlink:href="#close2"/>
+                </svg>
+            </a>
+        </div>
+        <div class="inner-main in-dialogue">
+
+            <form action = "/my_decks" method = "POST">
+                <label for="name"> what is this set called? </label>
+                <input type="text" name="name" placeholder="{{ session['username'] }}'s cards">
+                <input class="form-button" style="margin-top:2em;" type="submit" name="action" value="create">
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block user_content %}
+    <div class="content-grid" style="width:100%; height:100%">
+        <div class="inner-heading home-titles inverted">
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+            <svg class="svg-icon button" class="inner-header">
+                <use xlink:href="#cards"/>
+            </svg>
+            <h4 style="display:inline;"> decks </h4>
+            <svg class="separator dec" class="inner-header">
+                <use xlink:href="#line"/>
+            </svg>
+        </div>
+
+        <div class="inner-main">
+                <div class="stuff-grid" action="home_" method="get">
+
+                    <a href="javascript:open_dialogue('new_db')" class="gallery-item small">
+                        <div class="image-container small center-content">
+                                <svg class="svg-icon">
+                                    <use xlink:href="#add_button"/>
+                                </svg>
+                                <h6>add new!</h6>
+                        </div>
+                    </a>
+                {% if content %}
+                    {% for item in content %}
+                        <div class="cards-container small">
+                            <div style="display:flex; align-self:flex-end;"">
+                                <form action="/my_decks" method="post">
+                                    <input type="hidden" name="id" value="{{ item['id'] }}">
+                                    <div class="image-submit">
+                                        <input type="submit" name="action" value="edit">
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#pencil"/>
+                                        </svg>
+                                    </div>
+                                    <div class="image-submit">
+                                        <input type="submit" name="action" value="delete">
+                                        <svg class="svg-icon fill-cut smaller">
+                                            <use xlink:href="#trash"/>
+                                        </svg>
+                                    </div>
+                                </form>
+
+                                <!-- <div class="image-submit">
+                                    <form action="/my_decks" method="post">
+                                        <input type="hidden" name="id" value="{{ item['id'] }}">
+                                        <input type="submit" name="action" value="edit">
+                                        <svg class="svg-icon">
+                                            <use xlink:href="#pencil"/>
+                                        </svg>
+                                    </form>
+                                </div>
+                                <div class="image-submit">
+                                    <form action="/my_decks" method="post">
+                                        <input type="hidden" name="id" value="{{ item['id'] }}">
+                                        <input type="submit" name="action" value="delete">
+                                        <svg class="svg-icon fill-cut smaller">
+                                            <use xlink:href="#trash"/>
+                                        </svg>
+                                    </form>
+                                </div> -->
+
+                            </div>
+                            <div style="position:relative; z-index:1;">
+                                <div class="cards" style="position:fixed; z-index:-2; transform:rotate(5deg);box-shadow: 0px 1px 11px 4px rgb(0, 0, 0, .05);"><h6> {{ item['name'] }} </h6></div>
+                                <div class="cards" style="position:fixed; z-index:-1; transform:rotate(-7deg);box-shadow: 0px 1px 11px 4px rgb(0, 0, 0, .05);"><h6> {{ item['name'] }} </h6></div>
+                                <div class="cards" style="box-shadow: 0px 1px 11px 4px rgb(0, 0, 0, .05);"><h6> {{ item['name'] }} </h6></div>
+                            </div>
+
+                                <!-- <div class="cards">
+                                    <h6>{{ item['name'] }}</h6>
+                                </div> -->
+                        </div>
+                    {% endfor %}
+            </div>
+            {% else %}
+            <div class="">
+                <div class="cards-container small">
+                    <h6>a deck is a set of cards you can draw from, just like the one in the main page.</h6>
+                    <h6>but, in this case you are the one who picks the words and phrases in it :D</h6>
+                </div>
+            </div>
+            {% endif %}
+    </div>
+{% endblock %}
