@@ -15,11 +15,14 @@ class CardsPicker:
             "situation_2":[False,False,False,False,True,True],
             "instruction":[False,False,False,False,False,True]
             }
+    level_range = range(0,5)
 
     def __init__ (self, controller):
         self.db = controller
         self.card = []
-        self.level = 0
+        self.instruction = False;
+        self.level = 3
+        self.instruction_card = []
         # array of dicts: keys identify the picks by name
         # values is an array with 2 items: table names and filter
 
@@ -29,7 +32,10 @@ class CardsPicker:
 
     #sets new value to level
     def change_level(self, new_level):
-        self.level = int(new_level);
+        if int(new_level) in self.level_range:
+            self.level = int(new_level)
+        else:
+            self.level = 3
 
     def pick(self):
         self.card = []
@@ -110,3 +116,12 @@ class CardsPicker:
     def get_random(self, table_name, filter=None):
         row = self.db.get_random(table_name, filter)
         return row
+
+    def details(self):
+        me = {}
+        me['deck'] = "default"
+        me['level'] = self.level
+        me['max-level'] = 4
+        me['language'] = self.db.language
+        me['action'] = "/"
+        return me
