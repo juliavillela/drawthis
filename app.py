@@ -156,7 +156,7 @@ def home():
 def bookmarks():
     if request.method == "GET":
         content = ctrl.user_bookmarks(session["user_id"])
-        return render_template("my_bookmarks.html", content = content)
+        return render_template("/my_bookmarks.html", content = content)
     else:
         action = request.form.get("action")
         bookmark_id = request.form.get("id")
