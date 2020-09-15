@@ -10,21 +10,29 @@ class DbHelper:
         s = ", "
         columns = []
         values = []
+        input_text = {}
         for data in data_dict:
             columns.append(data)
-            values.append(self.literal(str(data_dict[data])))
+            value = data_dict.get(data)
+            if type(value) == dict:
+                input_text[data] = data_dict[data].get('input_text')
+                values.append(self.literal("input_text"))
+            else:
+                values.append(self.literal(str(value)))
         #add item to db
         query = "INSERT INTO " + self.name + " (" + s.join(columns) + ") VALUES (" + s.join(values) + " );"
         self.db.execute(query)
         id_dict = self.db.execute("SELECT last_insert_rowid()")
         id = id_dict[0].get('last_insert_rowid()')
+        self.update(id, input_text)
         return id
 
     def update(self, item_id, data_dict):
         for data in data_dict:
-            string = data + " = " + self.literal(data_dict.get(data))
+            string = data + " = :placeholder"
+            # string = data + " = " + self.literal(data_dict.get(data))
             query = "UPDATE " + self.name + " SET " + string + " WHERE id = " + str(item_id)
-            self.db.execute(query)
+            self.db.execute(query, placeholder = data_dict.get(data))
 
     def delete(self, item_id):
         query = "DELETE FROM " + self.name + " WHERE id = :id"

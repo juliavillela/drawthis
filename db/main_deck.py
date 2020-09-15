@@ -17,8 +17,12 @@ class MainDeck(Deck):
     def __init__(self, db, language):
         self.db = db
         self.language = language
-        self.filter = None
+        self.filter = ""
         self.load(language)
+
+    def add(self, name, item_data):
+        self.tables[name].add(item_data)
+        self.tables[name].load(self.filter)
 
     #from dict specifying the unwanted values for each column
     #filters out rows containing those values

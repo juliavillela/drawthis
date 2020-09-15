@@ -29,9 +29,6 @@ class Controller:
 
     def create_user(self, data):
         data["type"] = "user"
-        # avatars = self.avatars.list()
-        # id = randint(0, len(avatars)-1)
-        # data["avatar_id"] = avatars[id]['id']
         data["avatar_id"] = self.pick_avatar()
         user_id = self.users.add(data)
         return user_id
@@ -53,7 +50,7 @@ class Controller:
     def create_bookmark(self, user_id, cards):
         cards_string = join(str_arr(cards))
         #sends data dict to db manager
-        data = {'user_id':user_id, 'cards':cards_string}
+        data = {'user_id':user_id, 'cards':{'input_text':cards_string}}
         self.bookmarks.add(data)
 
     def delete_upload(self, item_id):
@@ -90,6 +87,8 @@ class Controller:
         for item in all:
             item['cards'] = split(item['cards'])
         return all
+    def write(self, array):
+        return join(array)
 
     def custom_deck(self, user_id, deck_id):
         if type(deck_id) != str:

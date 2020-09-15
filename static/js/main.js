@@ -69,6 +69,7 @@ function display_options() {
     options.style.display = "block";
 }
 
+
 function close_popup(popup_id){
     let options = document.getElementById(popup_id);
     let background = document.getElementById("pop-up-background");
@@ -76,6 +77,8 @@ function close_popup(popup_id){
     background.className.replace("active", "");
     background.style.display = "none";
 }
+
+
 
 function search_regex() {
     let string = document.querySelector("#search_input").value;
@@ -109,16 +112,23 @@ function end_search() {
     document.querySelector("#search-box").className = null;
 }
 
+
+function upload_with_cards(bookmark_id, dialogue_id) {
+    document.getElementById('bookmark_id').value = bookmark_id;
+    open_dialogue(dialogue_id);
+}
+
 function open_dialogue(id){
     document.getElementById("pop-up-background").style.display = "block"
     document.getElementById(id).style.display = "grid";
-
 }
 
 function close_dialogue(id) {
     document.getElementById(id).style.display = "none";
     document.getElementById("pop-up-background").style.display = "none"
 }
+
+
 
 function alert() {
     document.getElementById("alert").style.padding = "2em";
@@ -128,17 +138,19 @@ function close_alert() {
     document.getElementById("alert").style.display = "none";
 }
 
-function add_card_input(){
-// on key up create another input slot
-    let template = document.getElementById("card_input");
-    let parent = document.getElementById("cards_section");
-    let count = parent.children.length-1;
-    let clone = template.cloneNode(true);
-    clone.id = "unset";
-    clone.name = "card_" + count;
-    clone.value = "";
-    parent.insertBefore(clone, parent.children[count]);
-}
+
+
+// function add_card_input(){
+// // on key up create another input slot
+//     let template = document.getElementById("card_input");
+//     let parent = document.getElementById("cards_section");
+//     let count = parent.children.length-1;
+//     let clone = template.cloneNode(true);
+//     clone.id = "unset";
+//     clone.name = "card_" + count;
+//     clone.value = "";
+//     parent.insertBefore(clone, parent.children[count]);
+// }
 
 function display(element_id) {
     element = document.getElementById(element_id);
@@ -148,6 +160,7 @@ function display(element_id) {
         element.style.display = "none";
     }
 }
+
 
 function collapse_ui() {
     let ui_block  = document.getElementById("user-info");
@@ -164,6 +177,7 @@ function open_ui() {
     }
     document.getElementById("invisible-collapse").style.display="block";
 }
+
 
 function edit_cards() {
     document.getElementById("static-cards").style.display = "none";

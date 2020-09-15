@@ -1,10 +1,23 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    <form action = "/uploader" method = "POST"
-       enctype = "multipart/form-data">
-       <input type = "file" name = "file" />
-       <input type = "submit"/>
-    </form>
+<div id="upload" class="content-grid pop-up" autofocus>
 
+    <div class="inner-header in-dialogue">
+        <h5> upload image </h5>
+        <a href="javascript:close_dialogue('upload')">
+            <svg class="svg-icon close-bttn">
+                <use xlink:href="#close2"/>
+            </svg>
+        </a>
+    </div>
+    <div class="inner-main in-dialogue">
+
+        <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+            <label for="file"> accepted formats: jpg, gif and png </label>
+            <input type = "file" name = "file" value="select image"/>
+            <input class="form-button" style="margin-top:2em" type = "submit" value="upload"/>
+        </form>
+    </div>
+</div>
 {% endblock %}

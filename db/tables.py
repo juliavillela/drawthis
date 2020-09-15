@@ -32,6 +32,6 @@ class Table(DbHelper):
         query = "DELETE FROM :table " + filter
         self.db.execute(query, table = self.name)
 
-    def add(self, data):
-        query= "INSERT INTO :table (deck_id, main) VALUES (:deck_id, :main)"
-        self.db.execute(query, table=self.name, deck_id = data['deck_id'], main=data['main'])
+    # def add(self, data):
+    #     query= "INSERT INTO :table (deck_id, main) VALUES (:deck_id, :main)"
+    #     self.db.execute(query, table=self.name, deck_id = data['deck_id'], main=data['main'])

@@ -1,6 +1,25 @@
 {% extends "home_layout.html" %}
 
 {% block pop_up%}
+<div id="upload" class="content-grid pop-up" autofocus>
+
+    <div class="inner-header in-dialogue">
+        <h5> upload image </h5>
+        <a href="javascript:close_dialogue('upload')">
+            <svg class="svg-icon close-bttn">
+                <use xlink:href="#close2"/>
+            </svg>
+        </a>
+    </div>
+    <div class="inner-main in-dialogue">
+        <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+            <input id="bookmark_id" type="hidden" name="bookmark_id" value="">
+            <label for="file"> accepted formats: jpg, gif and png </label>
+            <input type = "file" name = "file" value="select image"/>
+            <input class="form-button" style="margin-top:2em" type = "submit" value="upload"/>
+        </form>
+    </div>
+</div>
 {% endblock %}
 
 
@@ -27,12 +46,12 @@
                             <div style="display:flex; align-self:flex-end;"">
                                 <form class="" action="/my_bookmarks" method="post">
                                     <input type="hidden" name="id" value="{{ item['id'] }}">
-                                    <div class="image-submit" style="display:inline-block;">
-                                        <input type="submit" name="action" value="upload drawing">
+                                    <a href="javascript:upload_with_cards({{ item['id'] }}, 'upload')" class="image-submit" style="display:inline-block;">
+                                        <!-- <input type="submit" name="action" value="upload drawing"> -->
                                         <svg class="svg-icon fill-cut smaller">
                                             <use xlink:href="#upload"/>
                                         </svg>
-                                    </div>
+                                    </a>
                                     <div class="image-submit" style="display:inline-block;">
                                         <input type="submit" name="action" value="delete">
                                         <svg class="svg-icon fill-cut smaller">
@@ -41,7 +60,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
+
                             {% for card in item['cards'] %}
                                 <div class="cards small">
                                     <h6>{{ card }}</h6>

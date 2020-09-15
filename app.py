@@ -104,7 +104,7 @@ def register():
     else:
         #saves form data to a dict
         data={}
-        data['username'] = request.form.get("username")
+        data['username'] = {'input_text':request.form.get("username")}
         #hasehs password and stores hash
         password = request.form.get("password")
         data['hash'] = generate_password_hash(password)
@@ -164,7 +164,7 @@ def bookmarks():
             ctrl.bookmarks.delete(bookmark_id);
             return redirect("/my_bookmarks")
         else:
-            return redirect("/upload")
+            return redirect(url_for('upload', cards=bookmark_id))
 
 @app.route("/my_uploads")
 @login_required
@@ -183,7 +183,7 @@ def decks():
 
         if action == 'create':
             deck = {}
-            deck['name']=request.form.get('name')
+            deck['name']= {'input_text':request.form.get('name')}
             deck['user_id'] = session['user_id']
             deck_id = ctrl.decks.add(deck)
             if deck_id:
@@ -268,7 +268,7 @@ def backstage():
             for name in table_columns:
                 input = request.form.get(name)
                 if input:
-                    input_data[name] = input
+                    input_data[name] = {'input_text':input}
 
             src.add(table_name, input_data)
 
@@ -278,9 +278,9 @@ def backstage():
 
         return redirect("/backstage?table=" + table_name)
 
-@app.route("/upload")
+@app.route("/upload/<bookmark_id>")
 @login_required
-def upload_file():
+def upload_file(bookmark_id=None):
    return render_template('upload.html')
 
 @app.route('/uploader', methods = ['GET', 'POST'])
@@ -292,16 +292,21 @@ def uploader():
       #checks file extention
       extention = os.path.splitext(file.filename)[1]
       if extention not in ALLOWED_EXTENSIONS:
+          flash("sorry, this type of file is not allowed.")
           return redirect("/upload")
       else:
-          #writes file to db, gets filename and id
-          file_db = ctrl.create_upload(session['user_id'], extention)
-          file_path = os.path.join(app.config["UPLOAD_FOLDER"], file_db['filename'])
-          #saves file
-          file.save( file_path )
-          #updates image path in db
-          ctrl.uploads.update( file_db['id'], {'path':file_path})
-          return redirect("/image?img=" + str(file_db['id']))
+        #writes file to db, gets filename and id
+        file_db = ctrl.create_upload(session['user_id'], extention)
+        file_path = os.path.join(app.config["UPLOAD_FOLDER"], file_db['filename'])
+        #saves file
+        file.save( file_path )
+        #check if form has cards input
+        bookmark_id = request.form.get('bookmark_id')
+        if bookmark_id:
+            cards = ctrl.bookmarks.find(bookmark_id)[0]
+        #updates image path in db
+        ctrl.uploads.update( file_db['id'], {'path':file_path, 'cards': cards['cards']})
+        return redirect("/image?img=" + str(file_db['id']))
 
 @app.route('/image', methods=['GET', 'POST'])
 @login_required
@@ -363,7 +368,10 @@ def admin():
             for name in table_columns:
                 input = request.form.get(name)
                 if input:
-                    input_data[name] = input
+                    if name in ['article','noun','action','situation']:
+                        input_data[name] = {'input_text':input}
+                    else:
+                        input_data[name] = input
 
             tables.add(table_name, input_data)
 
