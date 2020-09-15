@@ -66,6 +66,8 @@ class Controller:
     def update_upload(self, image_id, imd):
         data = {}
         data['cards'] = cards_imd(imd)
+        print("-----in update print data:")
+        print(data)
         self.uploads.update(image_id, data)
 
     def update_user_avatar(self, user_id):
@@ -76,11 +78,11 @@ class Controller:
     def read(self, data):
         parse = ['cards']
         for row in data:
-            print(row)
             for col in row:
-                print(col)
                 if col in parse:
                     row[col] = split(row[col])
+        print("-----in read print data:")
+        print(data)
         return data
 
     def user_bookmarks(self, user_id):

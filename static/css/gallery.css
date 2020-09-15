@@ -9,8 +9,9 @@
 }
 
 .gallery-grid.small {
-    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-gap: 1em;
     width: unset;
 }
 
@@ -70,6 +71,11 @@
 .gallery-details {
     width: 300px;
     min-height: 60px;
+    margin-top: .6em;
+}
+
+.gallery-details.single {
+    width:500px;
 }
 
 .gallery-details.small {

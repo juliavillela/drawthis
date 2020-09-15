@@ -164,3 +164,17 @@ function open_ui() {
     }
     document.getElementById("invisible-collapse").style.display="block";
 }
+
+function edit_cards() {
+    document.getElementById("static-cards").style.display = "none";
+    document.getElementById("static-buttons").style.display = "none";
+    document.getElementById("edit-cards").style.display = "block";
+    document.getElementById("edit-buttons").style.display = "block";
+}
+
+function cancel_edit_cards() {
+    document.getElementById("static-cards").style.display = "block";
+    document.getElementById("static-buttons").style.display = "block";
+    document.getElementById("edit-cards").style.display = "none";
+    document.getElementById("edit-buttons").style.display = "none";
+}

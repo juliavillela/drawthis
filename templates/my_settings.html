@@ -5,7 +5,7 @@
         <div class="inner-header in-dialogue">
             <h5> edit username </h5>
             <a href="javascript:close_dialogue('edit-username')">
-                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                <svg class="svg-icon close-bttn">
                     <use xlink:href="#close2"/>
                 </svg>
             </a>
@@ -31,7 +31,7 @@
         <div class="inner-header in-dialogue">
             <h5> edit password </h5>
             <a href="javascript:close_dialogue('edit-password')">
-                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                <svg class="svg-icon close-bttn">
                     <use xlink:href="#close2"/>
                 </svg>
             </a>
@@ -79,7 +79,7 @@
         </div>
 
         <div class="inner-main center-content">
-            <table class="table" style="width:fit-content; box-shadow: 8px 9px 0px 2px #4c4c4c;">
+            <table class="table solid-background" style="width:fit-content; box-shadow: 8px 9px 0px 2px #4c4c4c;">
             <tr>
                 <td><h5><strong>avatar image:</strong></h5></td>
 
@@ -89,7 +89,7 @@
                     </div>
                 </td>
                 <td><form action="/my_settings" method="post">
-                    <div class="image-submit">
+                    <div class="image-submit" style="height:35pt; width:30pt; fill:var(--black)">
                         <input type="submit" name="action" value="avatar">
                         <svg class="svg-icon fill-only">
                             <use xlink:href="#dice"/>
@@ -119,7 +119,7 @@
             </tr>
 
             </table>
-            <table class="table" style="margin-top: 3em; width:fit-content;">
+            <table class="table solid-background" style="margin-top: 3em; width:fit-content;">
                 <td><h6>delete my account</h6></td>
                 <td><a href="javascript:open_dialogue('#')">
                     <svg class="svg-icon fill-cut smaller">

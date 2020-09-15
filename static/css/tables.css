@@ -7,7 +7,7 @@
     padding: 1em;
 }
 
-div #search-box {
+div#search-box {
     background: #e2e0e0;
     padding: 5pt;
     border-radius: 15px;
@@ -30,7 +30,13 @@ div#search-box.active{
     font-weight: 700;
     padding-right: .6em;
     padding-left: .6em;
-    box-shadow: 3px 3px 0px 0px var( --accent);
+    box-shadow: 3px 3px 0px 0px var(--accent);
+}
+
+.form-button.black{
+    border-color: var(--black);
+    background-color: var(--black);
+    box-shadow: 3px 3px 0px 0px var(--black);
 }
 
 .form-button:disabled {

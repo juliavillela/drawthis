@@ -32,7 +32,9 @@ def cards_imd(imd):
     cards =[]
     for item in imd:
         if re.search("card", item):
-            cards.append(imd.get(item))
+            card = imd.get(item);
+            if len(card) > 0 :
+                cards.append(card)
     string = join(cards)
     return string
 

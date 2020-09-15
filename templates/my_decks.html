@@ -6,7 +6,7 @@
         <div class="inner-header in-dialogue">
             <h5> create your own cards! </h5>
             <a href="javascript:close_dialogue('new_db')">
-                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                <svg class="svg-icon close-bttn">
                     <use xlink:href="#close2"/>
                 </svg>
             </a>
@@ -39,29 +39,30 @@
         </div>
 
         <div class="inner-main">
-                <div class="stuff-grid" action="home_" method="get">
+                <div class="stuff-grid">
 
-                    <a href="javascript:open_dialogue('new_db')" class="gallery-item small">
-                        <div class="image-container small center-content">
-                                <svg class="svg-icon">
-                                    <use xlink:href="#add_button"/>
-                                </svg>
-                                <h6>add new!</h6>
-                        </div>
-                    </a>
+                    <div class="center-content">
+                        <a href="javascript:open_dialogue('new_db')" class="add-button" style="padding: 1em;">
+                            <svg style="height: 50pt; width: 50pt; stroke-width: 1.2pt; padding: .3em; stroke: inherit; fill: inherit;">
+                                <use xlink:href="#add_button"/>
+                            </svg>
+                            <h6>create!</h6>
+                        </a>
+                    </div>
+
                 {% if content %}
                     {% for item in content %}
-                        <div class="cards-container small">
+                        <div class="cards-container small" style="padding-top:0;">
                             <div style="display:flex; align-self:flex-end;"">
                                 <form action="/my_decks" method="post">
                                     <input type="hidden" name="id" value="{{ item['id'] }}">
-                                    <div class="image-submit">
+                                    <div class="image-submit" style="display:inline-block;">
                                         <input type="submit" name="action" value="edit">
                                         <svg class="svg-icon">
                                             <use xlink:href="#pencil"/>
                                         </svg>
                                     </div>
-                                    <div class="image-submit">
+                                    <div class="image-submit" style="display:inline-block;">
                                         <input type="submit" name="action" value="delete">
                                         <svg class="svg-icon fill-cut smaller">
                                             <use xlink:href="#trash"/>
@@ -69,35 +70,12 @@
                                     </div>
                                 </form>
 
-                                <!-- <div class="image-submit">
-                                    <form action="/my_decks" method="post">
-                                        <input type="hidden" name="id" value="{{ item['id'] }}">
-                                        <input type="submit" name="action" value="edit">
-                                        <svg class="svg-icon">
-                                            <use xlink:href="#pencil"/>
-                                        </svg>
-                                    </form>
-                                </div>
-                                <div class="image-submit">
-                                    <form action="/my_decks" method="post">
-                                        <input type="hidden" name="id" value="{{ item['id'] }}">
-                                        <input type="submit" name="action" value="delete">
-                                        <svg class="svg-icon fill-cut smaller">
-                                            <use xlink:href="#trash"/>
-                                        </svg>
-                                    </form>
-                                </div> -->
-
                             </div>
-                            <div style="position:relative; z-index:1;">
+                            <div style="position:relative; z-index:1; margin:1em;">
                                 <div class="cards" style="position:fixed; z-index:-2; transform:rotate(5deg);box-shadow: 0px 1px 11px 4px rgb(0, 0, 0, .05);"><h6> {{ item['name'] }} </h6></div>
                                 <div class="cards" style="position:fixed; z-index:-1; transform:rotate(-7deg);box-shadow: 0px 1px 11px 4px rgb(0, 0, 0, .05);"><h6> {{ item['name'] }} </h6></div>
                                 <div class="cards" style="box-shadow: 0px 1px 11px 4px rgb(0, 0, 0, .05);"><h6> {{ item['name'] }} </h6></div>
                             </div>
-
-                                <!-- <div class="cards">
-                                    <h6>{{ item['name'] }}</h6>
-                                </div> -->
                         </div>
                     {% endfor %}
             </div>

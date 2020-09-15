@@ -26,13 +26,13 @@
     </div>
 
     <div id ="user-info" class="inner-header inverted">
-        <div id="profile" class="block">
+        <a href="/home" id="profile" class="block no-hover">
             <div id="avatar">
                 <img class="avatar" src="{{session['avatar']}}" alt="">
             </div>
             <h2>hi, {{ session['username'] }} </h2>
             <h6>this is home</h6>
-        </div>
+        </a>
 
         <svg class="separator" class="inner-header">
             <use xlink:href="#line"/>
@@ -70,8 +70,8 @@
         </svg>
 
         <ul class="block">
-            <li class="inverted color-change"><a class="no-hover" href="/logout">log out</a></li>
             <li class="inverted color-change"><a class="no-hover" href="/my_settings">settings</a></li>
+            <li class="inverted color-change"><a class="no-hover" href="/logout">log out</a></li>
         </ul>
     </div>
 

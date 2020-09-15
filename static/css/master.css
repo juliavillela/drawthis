@@ -38,6 +38,10 @@ body {
     color: var(--accent)
 }
 
+.solid-background {
+    background-color: var(--background)
+}
+
 .color-change:hover, .color-change:focus, .color-change:focus-within, .color-change:active {
     color: var(--accent);
     outline: none;
@@ -148,14 +152,14 @@ svg.svg-icon {
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 2pt;
-    padding: 1pt;
+    padding: 3pt;
     width: 25pt;
     height: 25pt;
 }
 
 svg.svg-icon.tiny {
-    width: 17pt;
-    height: 17pt;
+    width: 19pt;
+    height: 19pt;
 }
 
 svg.svg-icon:hover {
@@ -174,6 +178,17 @@ svg.svg-icon.fill-cut.smaller {
 svg.svg-icon.fill-only {
     fill: inherit;
     stroke: var( --background);
+}
+
+svg.svg-icon.close-bttn{
+    fill:var(--black);
+    width:17pt;
+    height: 17pt;
+    float: right;
+}
+svg.svg-icon.close-bttn:hover, svg.svg-icon.close-bttn:focus, svg.svg-icon.close-bttn:active {
+    fill:var(--accent);
+    stroke:var(--accent);
 }
 
 svg.svg-shape {
@@ -199,7 +214,7 @@ svg.svg-shape:hover {
 
 svg.svg-shape.dice:hover {
     stroke:none;
-    fill:inherit;
+    fill:var(--black);
 }
 
 svg.svg-shape.dice:active {

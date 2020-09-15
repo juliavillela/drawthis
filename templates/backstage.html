@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block pop_up %}
-    <div id="backstage-info" class="content-grid pop-up-xl">
+    <!-- <div id="backstage-info" class="content-grid pop-up-xl">
         <div class="inner-header">
             <a href="javascript:close_dialogue('backstage-info')">
-                <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                <svg class="svg-icon close-bttn" onclick="close_popup('options')">
                     <use xlink:href="#close2"/>
                 </svg>
             </a>
@@ -70,7 +70,7 @@
 
         </div>
     </div>
-    </div>
+    </div> -->
 {% endblock %}
 
 {% block user_content %}
@@ -84,14 +84,14 @@
             <ul style="grid-area:links">
                 <li>
                     <a href="/custom/{{session['deck_id']}}/2" class="link-with-img">
-                        <h6 class="link-text">play</h6>
+                        <h6 class="link-text center-content">play</h6>
                         <svg class="svg-icon fill-only link-img" style="height:40pt; width:40pt;">
                             <use xlink:href="#dice"/>
                         </svg>
                     </a>
                 </li>
             </ul>
-            <div id="search-box" style="grid-area:search-bar">
+            <div id="search-box" style="grid-area:search-bar; width:fit-content">
 
                 <input id="search_input" class="text_input" type="text" name="search" autocomplete="off">
                 <a href="javascript:search_regex()">
@@ -100,37 +100,41 @@
                     </svg>
                 </a>
                 <a href="javascript:end_search()" class="icon" disabled="true">
-                    <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+                    <svg class="svg-icon close-bttn">
                         <use xlink:href="#close2"/>
                     </svg>
                 </a>
             </div>
+
         </div>
     </div>
     <div class="inner-main">
     <ul>
         <div style="border-radius:50px; width:fit-content; grid-area:table-nav;">
-    {% for name in table_names %}
-        {% if table and table['name'] == name %}
+        {% if not table %}
         <li class="tab-button active">
-            <a href="/backstage?table={{ name }}" method="get" name="selected_table" value="{{ name }}">{{ name }}</a>
+            <a href="/backstage" method="get">info</a>
         </li>
         {% else %}
         <li class="tab-button">
-            <a href="/backstage?table={{ name }}" method="get" name="selected_table" value="{{ name }}">{{ name }}</a>
+            <a href="/backstage" method="get">info</a>
         </li>
         {% endif %}
-    {% endfor %}
+        {% for name in table_names %}
+            {% if table and table['name'] == name %}
+            <li class="tab-button active">
+                <a href="/backstage?table={{ name }}" method="get" name="selected_table" value="{{ name }}">{{ name }}</a>
+            </li>
+            {% else %}
+            <li class="tab-button">
+                <a href="/backstage?table={{ name }}" method="get" name="selected_table" value="{{ name }}">{{ name }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
         </div>
     </ul>
     {% if table %}
-
-        <table id="table" class="table" style="width:100%; border-top:solid var(--black); margin:0;">
-            <!-- <thead>
-                <th> {{ table['name'] }} </th>
-                <th> do </th>
-            </thead> -->
-
+        <table id="table" class="table solid-background" style="width:100%; border-top:solid var(--black); margin:0;">
             <thead class="special">
                 <form class="table" action="/backstage" method="post">
                     <input type="hidden" name="table_name" value="{{ table['name'] }}">
@@ -159,13 +163,51 @@
                     </tr>
                 {% endfor %}
             </tbody>
+        </table>
 
     {% else %}
-        <!-- <h3>here you can manage the phrases in your deck</h3>
-        <p>each link corresponds to one type of card.</p> -->
-        <div class="">
-            <h5>pick a table!</h5>
+        <div class="center-content" style="border-top: solid var(--black); padding-top: 1em;">
+            <div class="solid-background" style="max-width: 600px;">
+                <h5>Here you can add words and phrases to your deck</h5>
+                <p>think of each table as a paperbag where we will put all your phrases, shake and then draw a random one from each.</p>
+                <div id="subjects" class="grid-2-300 no-hover">
+                    <div style="grid-area: ex; width:300px height:fit-content;">
+                        <div class="cards">
+                            <h6>a corageous paper clip</h6>
+                        </div>
+                    </div>
+
+                    <div style="grid-area: about; width:300px">
+                        <p style="text-align:justify; font-size:small"><strong class="accent">subjects</strong> corresponds to the first card picked :) it is the main character of the drawing. it could be a person, an animal, well... it could be anything really. </p>
+                    </div>
+                </div>
+                <div id="actions" class="grid-2-300 no-hover">
+                    <div style="grid-area: ex; width:300px height:fit-content;">
+                        <div class="cards">
+                            <h6>travelling the world</h6>
+                        </div>
+                    </div>
+
+                    <div style="grid-area: about; width:300px">
+                        <p style="text-align:justify; font-size:small"><strong class="accent">actions</strong> usually contain a verb. something for the subject to be doing... or maybe not. go crazy!</p>
+                    </div>
+                </div>
+                <div id="situations" class="grid-2-300 no-hover">
+                    <div style="grid-area: ex; width:300px height:fit-content;">
+                        <div class="cards">
+                            <h6>inside a dream</h6>
+                        </div>
+                    </div>
+
+                    <div style="grid-area: about; width:300px">
+                        <p style="text-align:justify; font-size:small"><strong class="accent">situations</strong> can be a place, a time, a state of mind. or something else entirely :D</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
+
 
     {% endif %}
 

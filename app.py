@@ -190,7 +190,6 @@ def decks():
                 session["decks"] = ctrl.decks.all_from_user(session['user_id'])
                 session['deck_id'] = deck_id
                 ctrl.custom_deck(session['user_id'], deck_id)
-                flash("deck successfully created")
                 return redirect("/backstage")
             else:
                 flash("something went wrong")
@@ -247,6 +246,7 @@ def settings():
             return redirect('/my_settings')
 
 @app.route("/backstage", methods=["GET", "POST"])
+@login_required
 def backstage():
     src = ctrl.alt_deck
     deck_info = ctrl.decks.find(session['deck_id'])[0]
@@ -304,6 +304,7 @@ def uploader():
           return redirect("/image?img=" + str(file_db['id']))
 
 @app.route('/image', methods=['GET', 'POST'])
+@login_required
 def image():
     if request.method == "GET":
         img_id = int(request.args.get("img"))
@@ -324,6 +325,10 @@ def image():
         else:
             #updates image data and displays updated
             form = request.form
+
+            print("-----in route print form:")
+            print(form)
+
             ctrl.update_upload(image_id, form)
             return redirect("/image?img=" + str(image_id))
 

@@ -1,35 +1,67 @@
-{% extends "layout.html" %}
+{% extends "home_layout.html" %}
 {% block page_style %}
-<link rel="stylesheet" href="/static/gallery.css">
-<link rel="stylesheet" href="/static/forms.css">
 {% endblock %}
 
-{% block main %}
+{% block user_content %}
 {% if image %}
 <div class="center-content">
     <form class="" action="\image" method="post">
         <div class="gallery-item single">
-            <div class="image-container single">
-                <img class="gallery-image single" src="{{ image['path']}}" alt="">
+            <div class="image-submit">
+                <input type="submit" name="button" value="delete">
+                <svg class="svg-icon fill-cut smaller">
+                    <use xlink:href="#trash"/>
+                    <h6 style="display:inline">delete image</h6>
+                </svg>
             </div>
-            <div id="cards_section" class="gallery-details">
+            <div class="image-container single">
+                <img class="gallery-image single" src="{{ image['path']}}" alt="{{ session['username'] }}'s uploaded image'">
+            </div>
+            <div id="cards_section" class="gallery-details single" style="display:grid; grid-template-columns: 90% 10%; grid-template-areas:'cards buttons'">
                 <input type="hidden" name="image_id" value="{{ image['id']}}">
+
                 {% if image['cards']%}
-                    {% for card in image['cards'] %}
-                        <input type="text-area" name="cards" value="{{ card }}" placeholder="manually add the cards">
-                    {% endfor %}
-                {% else %}
-                    <input id="card_input" type="text-area" name="card_1" placeholder="which cards did you draw from?">
-                    <a href="javascript:add_card_input()">
-                        <svg class="svg-icon">
-                            <use xlink:href="#add_button"/>
-                        </svg>
-                    </a>
+                    <div id="static-cards" style="grid-area:cards">
+                        {% for card in image['cards'] %}
+                            <h6 class="instructions">{{ card }}</h6>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div id="static-cards" style="grid-area:cards">
+                            <h6 class="instructions">this image doesn't have cards yet.</h6>
+                            <h6 class="instructions">click the pencil to add some.</h6>
+                    </div>
                 {% endif %}
+
+                    <div id="static-buttons" style="grid-area:buttons">
+                        <a href="javascript:edit_cards()">
+                            <svg class="svg-icon">
+                                <use xlink:href="#pencil"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div id="edit-cards" style="display:none; grid-area:cards">
+                        {% for i in range(0,5) %}
+                            <input type="text-area" name="card_{{ i }}" value="{{ image['cards'][i] }}" placeholder="enter card {{ i+1 }}">
+                        {% endfor %}
+                    </div>
+                    <div id="edit-buttons" style="display:none; grid-area:buttons">
+                        <a href="javascript:cancel_edit_cards()">
+                            <svg class="svg-icon close-bttn">
+                                <use xlink:href="#close2"/>
+                            </svg>
+                        </a>
+                        <div class="image-submit">
+                            <input type="submit" name="button" value="update">
+                            <svg class="svg-icon fill-cut smaller">
+                                <use xlink:href="#save"/>
+                            </svg>
+                        </div>
+                    </div>
+
             </div>
         </div>
-        <input type="submit" name="button" value="update">
-        <input type="submit" name="button" value="delete">
     </form>
 </div>
 {% else %}

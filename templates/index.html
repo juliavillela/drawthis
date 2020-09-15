@@ -13,7 +13,7 @@
 
     <div id="options" class="content-grid dialogue" style="display:none">
         <div class="inner-header" style="padding:0;">
-            <svg class="svg-icon fill-only" style="width:15px; height:15px; stroke:var(--black); float:right" onclick="close_popup('options')">
+            <svg class="svg-icon close-bttn" onclick="close_popup('options')">
                 <use xlink:href="#close2"/>
             </svg>
         </div>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 {% endif %}
-                <input type="submit" class="form-button" style="margin-top:1em" name="button" value="submit">
+                <input type="submit" class="form-button black" style="margin-top:1em" name="button" value="submit">
             </form>
         </div>
 
@@ -104,12 +104,12 @@
 
             <div id="config">
                 <a href="javascript:display_options()" class="turn-grow">
-                    <svg class="svg-icon fill-cut">
+                    <svg class="svg-icon fill-cut" style="width: 30pt; height:30pt;">
                         <use xlink:href="#cogs"/>
                     </svg>
                 </a>
                 {% if session['user_id'] %}
-                <div class="image-submit turn-grow">
+                <div class="image-submit turn-grow" style="width:27pt; height:27pt;">
                     <form action="/save" method="post">
                         <input type="hidden" name="cards" value="{{ cards }}">
                         <input type="submit" name="save" value="save" style="opacity:0; position:fixed;">
