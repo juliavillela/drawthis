@@ -304,8 +304,10 @@ def uploader():
         bookmark_id = request.form.get('bookmark_id')
         if bookmark_id:
             cards = ctrl.bookmarks.find(bookmark_id)[0]
+            ctrl.uploads.update( file_db['id'], {'path':file_path, 'cards': cards['cards']})
         #updates image path in db
-        ctrl.uploads.update( file_db['id'], {'path':file_path, 'cards': cards['cards']})
+        else:
+            ctrl.uploads.update( file_db['id'], {'path':file_path})
         return redirect("/image?img=" + str(file_db['id']))
 
 @app.route('/image', methods=['GET', 'POST'])
