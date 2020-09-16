@@ -76,9 +76,19 @@
 {% block main %}
     <div class="center-content">
         <div class="header">
-            <div id="logo">
+            <!-- <div id="logo">
                 <img src="../static/images/title_b.svg" alt="">
+            </div> -->
+            <div class="logo" style="padding:1em;">
+
+                <svg class="svg-shape" style="width: 200px;height: 70px;stroke-width: 31pt;position:fixed;stroke: var(--background);fill: var(--background);z-index: -1;">
+                    <use xlink:href="#title"/>
+                </svg>
+                <svg class="svg-shape" style="width: 200px;height: 70px;stroke-width: .5pt; padding: 1pt;">
+                    <use xlink:href="#title"/>
+                </svg>
             </div>
+
             <a id="dice_button" href="{{ details['action'] }}">
                  <!-- <i class="fas fa-dice"></i>  -->
                  <svg class="svg-shape dice">
