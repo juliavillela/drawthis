@@ -25,14 +25,14 @@
                     <div class="input-area">
                         <input type="hidden" name="curr_level" value="{{details['level']}}">
                         <label id="slider_label" for="level"></label>
-                        <input type="range" id="slider_input" name="level" value="3" min="0" max= "{{details['max-level']}}" onchange="update_slider()" style="margin:0">
+                        <input type="range" id="slider_input" name="level" value="{{details['level']}}" min="0" max= "{{details['max-level']}}" onchange="update_slider()" style="margin:0">
                     </div>
                 </div>
 
                 <div id="language-block" class="block form-info inline">
                     <h6 class="input-title inline">language: </h6>
                     <div class="input-area">
-                        <input type="hidden" name="curr_language" value="{{details['language']}}">
+                        <input type="hidden" name="curr_language" value="{{session['language']}}">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="language" id="en" value="_en">
                             <label class="form-check-label" for="language">en</label>

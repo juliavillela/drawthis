@@ -40,9 +40,12 @@ tables = MainDeck(db, "_en")
 picker = CardsPicker(tables)
 ctrl = Controller(app_db)
 
+
 @app.route("/", methods=["GET", "POST"])
 @app.route("/custom/<deck_id>/<lvl>", methods=["GET", "POST"])
 def index(deck_id="", lvl=""):
+    if not session.get('language'):
+        session['language'] = "_en"
     #if request for custom deck id
     if deck_id != "":
         #chech deck exists
@@ -89,6 +92,7 @@ def index(deck_id="", lvl=""):
             new_language = request.form.get('language')
             if new_language and new_language != request.form.get('curr_language'):
                 draw.change_language(new_language)
+                session['language'] = new_language
             return redirect("/")
 
 @app.route("/gallery")
@@ -232,6 +236,9 @@ def settings():
                     #hashes new password and saves hash to db.
                     new_password = request.form.get('password')
                     data['hash'] = generate_password_hash(new_password)
+                elif action == 'delete my account':
+                    ctrl.delete_user(user['id'])
+                    return redirect("/logout")
                 else:
                     #updates username in db
                     new_username = request.form.get('username')

@@ -98,3 +98,17 @@ class Controller:
     def delete_deck(self, deck_id):
         self.alt_deck.clear_deck_data(deck_id)
         self.decks.delete(deck_id)
+
+    def delete_user(self, user_id):
+        uploads = self.uploads.all_from_user(user_id)
+        decks = self.decks.all_from_user(user_id)
+        bookmarks = self.bookmarks.all_from_user(user_id)
+
+        for upload in uploads:
+            self.delete_upload(upload['id'])
+        for deck in decks:
+            self.delete_deck(deck['id'])
+        for bookmark in bookmarks:
+            self.bookmarks.delete(bookmark['id'])
+
+        self.users.delete(user_id)

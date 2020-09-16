@@ -22,7 +22,7 @@
                     <input onblur="none_empty()" type="password" name="validate" autocomplete="current-password" value="" placeholder="current password" class="text_input">
                     <p class="issue-text"></p>
                 </div>
-                <input id="submit" disabled class="form-button" type="submit" name="action" value="username">
+                <input id="submit" disabled class="form-button" type="submit" name="action" value="change username">
             </form>
         </div>
     </div>
@@ -62,6 +62,29 @@
         </div>
     </div>
 
+    <div id="delete-account" class="content-grid pop-up" style="display:none" autofocus>
+        <div class="inner-header in-dialogue">
+            <h5> delete account </h5>
+            <a href="javascript:close_dialogue('edit-password')">
+                <svg class="svg-icon close-bttn">
+                    <use xlink:href="#close2"/>
+                </svg>
+            </a>
+        </div>
+        <div class="inner-main in-dialogue">
+            <form id="account-delete" action = "/my_settings" method = "POST">
+                <p class="accent" style="border: solid var(--accent); padding: 3pt;">submitting this form will permanently erase all data and content saved to you account.</p>
+                <div id="validate" class="form-item block" style="background: var(--background);padding: .4em; color:var(--accent); border-radius:10px;">
+                    <label for="username">to authorize change, please insert your current password :)</label>
+                    <input type="password" onblur="none_empty()" name="validate" autocomplete="current-password" value="" placeholder="current password" class="text_input">
+                    <p class="issue-text"></p>
+                </div>
+
+                <input id="submit" disabled class="form-button" type="submit" name="action" value="delete my account">
+
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 
@@ -121,7 +144,7 @@
             </table>
             <table class="table solid-background" style="margin-top: 3em; width:fit-content;">
                 <td><h6>delete my account</h6></td>
-                <td><a href="javascript:open_dialogue('#')">
+                <td><a href="javascript:open_form_dialogue('delete-account', 'account-delete')">
                     <svg class="svg-icon fill-cut smaller">
                         <use xlink:href="#trash"/>
                     </svg>

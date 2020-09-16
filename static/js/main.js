@@ -26,7 +26,7 @@ function custom_deck() {
         level.max = 2;
     } else {
         // else, enable language choice and hide list
-        level.max = "initial";
+        level.max = 4;
         lang.style.display = "grid";
         input_area.style.display = "none";
     }
@@ -34,7 +34,7 @@ function custom_deck() {
 
 function update_checks() {
     let lang = document.getElementById("language-block");
-    check_curr_value(lang);
+    let curr = check_curr_value(lang);
     let deck = document.getElementById("deck-block");
     if (deck) {
         let custom = check_curr_value(deck);

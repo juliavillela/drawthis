@@ -78,7 +78,7 @@ class Deck:
     def clear_deck_data(self, deck_id):
         self.tables = {}
         self.deck_id = deck_id
-        self.filter = "WHERE deck_id = " + deck_id
+        self.filter = "WHERE deck_id = " + str(deck_id)
         for name in self.table_names:
             table = Table(self.db, name)
             table.clear_deck_data(self.filter)
