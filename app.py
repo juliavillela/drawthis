@@ -32,6 +32,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.secret_key = '/3yX R~XHH!jmN]LWX/r98jRT,?A0Z'
 
 db = SQL("sqlite:///db/drawthis.db")
 app_db = SQL("sqlite:///drawthis_app.db")
